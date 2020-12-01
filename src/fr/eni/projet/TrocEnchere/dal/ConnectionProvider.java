@@ -21,8 +21,8 @@ abstract class ConnectionProvider {
 			throw new RuntimeException("Impossible d'accéder à la base de données");
 		}
 	}
-	
 	public static Connection getConnection() throws SQLException {
 		return ConnectionProvider.dataSource.getConnection();
 	}
+	
 }
