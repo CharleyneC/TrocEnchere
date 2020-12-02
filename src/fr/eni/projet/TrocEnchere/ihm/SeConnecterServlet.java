@@ -1,6 +1,7 @@
 package fr.eni.projet.TrocEnchere.ihm;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.projet.TrocEnchere.dal.UtilisateurDAO;
+import fr.eni.projet.TrocEnchere.dal.UtilisateurDaoJdbcImpl;
 
 /**
  * Servlet implementation class SeConnecterServlet
@@ -21,7 +25,7 @@ public class SeConnecterServlet extends HttpServlet {
      */
     public SeConnecterServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -29,16 +33,57 @@ public class SeConnecterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageLogin.jsp");
-		rd.forward(request, response);
-	}
+	response.setContentType("/WEB-INF/jsp/pageLogin.jsp");
+	PrintWriter out = response.getWriter();
+		
+		String p=request.getParameter("pseudo");
+	    String em=request.getParameter("email");
+		String m=request.getParameter("mdp");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+		// Créer un nouvel UtilisateurDaoJdbcImpl pour utiliser ses fonctions non instanciées
+		UtilisateurDaoJdbcImpl uUser = new UtilisateurDaoJdbcImpl();
+		
+		
+		try {
+		
+			if (uUser.selectPseudo(p, m) != null || uUser.selectEmail(em, m) !=null ) {
+			
+		
+			}
+			
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+				
+				
+				
+		
+    
+    
+		
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		
+		
+	
+        {
+           
+             
+      
+		
+		
 	}
 
 }
+
+
+
+
+
+
+
+
+
