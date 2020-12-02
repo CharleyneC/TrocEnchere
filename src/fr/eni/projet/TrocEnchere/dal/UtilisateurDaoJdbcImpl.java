@@ -3,13 +3,17 @@ package fr.eni.projet.TrocEnchere.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
 	private final String SELECT_PSEUDO = "use enchere_bdd SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
-	private final String SELECT_EMAIL = "use enchere_bdd SELECT * FROM utilisateurs WHERE email = ? and mdp = ?";
+	private final String SELECT_EMAIL = "use enchere_bdd SELECT * FROM utilisateurs WHERE email = ? and mot_de_passe = ?";
+	private final String INSERT_USER = "USE enchere_bdd INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
+										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
 	
 	@Override
@@ -79,9 +83,40 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			}
 			rsEmail.close();			
 		}catch(Exception e) {
-			throw new DalException("Utilisateur introuvable");
+			throw new DalException(e.getMessage());
 		}
 		return userEmail;
+	}
+
+	@Override
+	public void addUtilisateur(Utilisateur user) {
+		try (Connection connect = ConnectionProvider.getConnection()) {
+			PreparedStatement pstt = connect.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
+			pstt.setString(1, user.getPseudo());
+			pstt.setString(2, user.getNom());
+			pstt.setString(3, user.getPrenom());
+			pstt.setString(4, user.getEmail());
+			pstt.setString(5, user.getNoTel());
+			pstt.setString(6, user.getRue());
+			pstt.setString(7, user.getCpo());
+			pstt.setString(8, user.getVille());
+			pstt.setString(9, user.getMdp());
+			pstt.setInt(10, user.getCredit());
+			pstt.setByte(11, user.getAdmin());
+			
+			pstt.executeUpdate();
+			
+			ResultSet rsAdd = pstt.getGeneratedKeys();
+			if(rsAdd.next()) {
+				int id = rsAdd.getInt(1);
+				user.setNoUser(id);
+			}
+			pstt.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

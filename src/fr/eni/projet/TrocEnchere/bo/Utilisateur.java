@@ -12,8 +12,8 @@ public class Utilisateur {
 	private String cpo;
 	private String ville;
 	private String mdp;
-	private int credit;
-	private byte admin;
+	private int credit =0;
+	private byte admin =0;
 	
 	
 	public Utilisateur() {
@@ -24,7 +24,20 @@ public class Utilisateur {
 		this.pseudo = pseudo;
 		this.mdp = mdp;
 	}
-	
+
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String noTel, String rue, String cpo,
+			String ville, String mdp) {
+		super();
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.noTel = noTel;
+		this.rue = rue;
+		this.cpo = cpo;
+		this.ville = ville;
+		this.mdp = mdp;
+	}
 	public Utilisateur(int noUser, String pseudo, String nom, String prenom, String email, String noTel, String rue,
 			String cpo, String ville, String mdp, int credit, byte admin) {
 		super();
@@ -41,8 +54,7 @@ public class Utilisateur {
 		this.credit = credit;
 		this.admin = admin;
 	}
-	
-	
+
 	public int getNoUser() {
 		return noUser;
 	}
