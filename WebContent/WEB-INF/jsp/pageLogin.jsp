@@ -10,7 +10,7 @@
 
  <!--formulaire-->
         
-            <form class="form-login" action="SeConnecterServlet" method="post">
+            <form class="form-login" action="SeConnecterServlet" method="get">
                 <label for="inputIdentifiant" class="sr-only">Identifiant</label>
                 <input type="text" id="inputIdentifiant" class="form-control" name="pseudo" placeholder="Pseudo" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>

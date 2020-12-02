@@ -32,10 +32,7 @@ public class SeConnecterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	response.setContentType("/WEB-INF/jsp/pageLogin.jsp");
-	PrintWriter out = response.getWriter();
-		
+				
 		String p=request.getParameter("pseudo");
 	    String em=request.getParameter("email");
 		String m=request.getParameter("mdp");
@@ -46,37 +43,22 @@ public class SeConnecterServlet extends HttpServlet {
 		
 		try {
 		
-			if (uUser.selectPseudo(p, m) != null || uUser.selectEmail(em, m) !=null ) {
+			if (uUser.selectPseudo(p, m) != null || uUser.selectEmail(em, m) != null ) {
 			
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/test.jsp");
+				rd.forward(request, response);
 		
 			}
 			
 		
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("erreur");
+	        RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/jsp/pageLogin.jsp");
+	        rd.include(request,response);
 		}
 		
-				
-				
-				
-		
-    
-    
-		
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
-		
-	
-        {
-           
-             
-      
-		
-		
 	}
-
+	
 }
 
 
