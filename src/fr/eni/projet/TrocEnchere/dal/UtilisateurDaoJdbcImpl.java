@@ -8,8 +8,8 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
-	private final String SELECT_PSEUDO = "SELECT * FROM utlisateur WHERE pseudo = ?, mdp = ?";
-	private final String SELECT_EMAIL = "SELECT * FROM utilisateur WHERE email = ?, mdp = ?";
+	private final String SELECT_PSEUDO = "use enchere_bdd SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+	private final String SELECT_EMAIL = "use enchere_bdd SELECT * FROM utilisateurs WHERE email = ? and mdp = ?";
 	
 	
 	@Override
@@ -43,7 +43,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			}
 			rsPseudo.close();			
 		}catch(Exception e) {
-			throw new DalException("Utilisateur introuvable");
+			throw new DalException(e.getMessage());
 		}
 		return userPseudo;
 	}
@@ -83,4 +83,6 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		}
 		return userEmail;
 	}
+	
+	
 }

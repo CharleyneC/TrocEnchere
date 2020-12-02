@@ -41,18 +41,17 @@ public class SeConnecterServlet extends HttpServlet {
 		UtilisateurDaoJdbcImpl uUser = new UtilisateurDaoJdbcImpl();
 		
 		
-		try {
-		
+		try {	
 			if (uUser.selectPseudo(p, m) != null || uUser.selectEmail(em, m) != null ) {
 			
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/test.jsp");
-				rd.forward(request, response);
-		
+				rd.forward(request, response);		
 			}
 			
 		
 		} catch (Exception e) {
 			System.out.println("erreur");
+			System.out.println(e.getMessage());
 	        RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/jsp/pageLogin.jsp");
 	        rd.include(request,response);
 		}
