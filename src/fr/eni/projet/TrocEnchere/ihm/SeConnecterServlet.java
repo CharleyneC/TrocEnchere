@@ -9,7 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import fr.eni.projet.TrocEnchere.bll.UtilisateurManager;
+import fr.eni.projet.TrocEnchere.bo.Utilisateur;
+import fr.eni.projet.TrocEnchere.dal.DalException;
 import fr.eni.projet.TrocEnchere.dal.UtilisateurDAO;
 import fr.eni.projet.TrocEnchere.dal.UtilisateurDaoJdbcImpl;
 
@@ -20,9 +24,7 @@ import fr.eni.projet.TrocEnchere.dal.UtilisateurDaoJdbcImpl;
 public class SeConnecterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public SeConnecterServlet() {
         super();
         
@@ -30,18 +32,26 @@ public class SeConnecterServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		String p=request.getParameter("pseudo");
-	    String em=request.getParameter("email");
-		String m=request.getParameter("mdp");
+		String p = request.getParameter("pseudo");
+	    String em = request.getParameter("email");
+		String m = request.getParameter("mdp");
 
-		// CrÃ©er un nouvel UtilisateurDaoJdbcImpl pour utiliser ses fonctions non instanciÃ©es
+		// Créer un nouvel UtilisateurDaoJdbcImpl pour utiliser ses fonctions non instanciées
 		UtilisateurDaoJdbcImpl uUser = new UtilisateurDaoJdbcImpl();
 		
-		
+		UtilisateurManager um = new UtilisateurManager();
+		try {
+			Utilisateur userU = um.trouverUser();
+			HttpSession sessionUser = request.getSession();
+			sessionUser.setAttribute("nom", userU);
+		} catch (DalException e1) {
+			e1.printStackTrace();
+		}
+	
 		try {	
 			if (uUser.selectPseudo(p, m) != null || uUser.selectEmail(em, m) != null ) {
-			
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/test.jsp");
+
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
 				rd.forward(request, response);		
 			}
 			

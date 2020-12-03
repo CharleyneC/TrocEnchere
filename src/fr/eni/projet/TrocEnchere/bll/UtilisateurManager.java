@@ -1,6 +1,7 @@
 package fr.eni.projet.TrocEnchere.bll;
 
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
+import fr.eni.projet.TrocEnchere.dal.DalException;
 import fr.eni.projet.TrocEnchere.dal.UtilisateurDAO;
 import fr.eni.projet.TrocEnchere.dal.UtilisateurFactory;
 
@@ -34,5 +35,9 @@ public class UtilisateurManager {
 		}
 		
 	}
+	
+	public Utilisateur trouverUser () throws DalException{
+		 return uDao.findAllUtilisateur();
+	} 
 
 }

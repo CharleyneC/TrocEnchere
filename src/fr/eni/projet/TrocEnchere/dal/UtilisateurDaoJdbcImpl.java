@@ -10,6 +10,7 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
+	private final String SELECT_ALL = "USE enchere_bdd SELECT * FROM utilisateurs";
 	private final String SELECT_PSEUDO = "use enchere_bdd SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	private final String SELECT_EMAIL = "use enchere_bdd SELECT * FROM utilisateurs WHERE email = ? and mot_de_passe = ?";
 	private final String INSERT_USER = "USE enchere_bdd INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
@@ -27,21 +28,12 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			
 			ResultSet rsPseudo = pstt.executeQuery();
 
-			if (rsPseudo.next()) {
-				int noUser = rsPseudo.getInt(1);
+			if (rsPseudo.next()) {;
 				String pseudoUser = rsPseudo.getString(2);
-				String nom = rsPseudo.getString(3);
-				String prenom = rsPseudo.getString(4);
 				String email = rsPseudo.getString(5);
-				String noTel = rsPseudo.getString(6);
-				String rue = rsPseudo.getString(7);
-				String cpo = rsPseudo.getString(8);
-				String ville = rsPseudo.getString(9);
 				String mdpUser = rsPseudo.getString(10);
-				int credit = rsPseudo.getInt(11);
-				byte admin = rsPseudo.getByte(12);
 				
-				userPseudo = new Utilisateur(noUser, pseudoUser, nom, prenom, email, noTel, rue, cpo, ville, mdpUser, credit, admin);
+				userPseudo = new Utilisateur(pseudoUser, email, mdpUser);
 			}else {
 				System.out.println("Pseudo ou mot de passe non reconnu!");
 			}
@@ -64,20 +56,11 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			ResultSet rsEmail = pstt.executeQuery();
 
 			if (rsEmail.next()) {
-				int noUser = rsEmail.getInt(1);
 				String pseudo = rsEmail.getString(2);
-				String nom = rsEmail.getString(3);
-				String prenom = rsEmail.getString(4);
 				String emailUser = rsEmail.getString(5);
-				String noTel = rsEmail.getString(6);
-				String rue = rsEmail.getString(7);
-				String cpo = rsEmail.getString(8);
-				String ville = rsEmail.getString(9);
 				String mdpUser = rsEmail.getString(10);
-				int credit = rsEmail.getInt(11);
-				byte admin = rsEmail.getByte(12);
 				
-				userEmail = new Utilisateur(noUser, pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit, admin);
+				userEmail = new Utilisateur(pseudo, emailUser, mdpUser);
 			}else {
 				System.out.println("Pseudo ou mot de passe non reconnu!");
 			}
@@ -119,5 +102,38 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		
 	}
 	
+	@Override
+	public Utilisateur findAllUtilisateur() throws DalException {
+		Utilisateur userAll = null;
+		
+		try (Connection connect = ConnectionProvider.getConnection();
+				PreparedStatement pstt = connect.prepareStatement(SELECT_ALL)){
+				
+				ResultSet rs = pstt.executeQuery();
+
+				if (rs.next()) {
+					int noUser = rs.getInt(1);
+					String pseudo = rs.getString(2);
+					String nom = rs.getString(3);
+					String prenom = rs.getString(4);
+					String emailUser = rs.getString(5);
+					String noTel = rs.getString(6);
+					String rue = rs.getString(7);
+					String cpo = rs.getString(8);
+					String ville = rs.getString(9);
+					String mdpUser = rs.getString(10);
+					int credit = rs.getInt(11);
+					byte admin = rs.getByte(12);
+					
+					userAll = new Utilisateur(noUser, pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit, admin);
+				}else {
+					System.out.println("Pseudo ou mot de passe non reconnu!");
+				}
+				rs.close();			
+			}catch(Exception e) {
+				throw new DalException(e.getMessage());
+			}
+			return userAll;
+	}
 	
 }
