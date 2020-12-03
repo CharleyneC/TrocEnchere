@@ -12,8 +12,8 @@ public class Utilisateur {
 	private String cpo;
 	private String ville;
 	private String mdp;
-	private int credit =0;
-	private byte admin =0;
+	private int credit = 100;
+	private byte admin = 0;
 	
 	
 	public Utilisateur() {
