@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Accueil</title>
+<title>Profil utilisateur</title>
 
 </head>
 <body>
