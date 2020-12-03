@@ -12,7 +12,8 @@
 </head>
 <body>
 
-<p> Bonjour ${Utilisateur.nom} ${Utilisateur.prenom} !</p>
+<h1> Bonjour ${Utilisateur.nom} ${Utilisateur.prenom} !</h1>
+<p> ${Utilisateur.credit} </p>
 
 
 </body>
