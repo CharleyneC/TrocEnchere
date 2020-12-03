@@ -43,7 +43,9 @@ public class SeConnecterServlet extends HttpServlet {
 		try {
 			Utilisateur userU = um.trouverUser();
 			HttpSession sessionUser = request.getSession();
-			sessionUser.setAttribute("nom", userU);
+			
+			sessionUser.setAttribute("Utilisateur", userU);
+
 		} catch (DalException e1) {
 			e1.printStackTrace();
 		}

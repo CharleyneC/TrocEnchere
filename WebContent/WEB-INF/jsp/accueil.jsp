@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<p> Bonjour </p>
+<p> Bonjour ${Utilisateur.nom} ${Utilisateur.prenom} !</p>
 
 
 </body>
