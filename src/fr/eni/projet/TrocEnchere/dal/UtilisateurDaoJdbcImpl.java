@@ -27,7 +27,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		try (Connection connect = ConnectionProvider.getConnection();
 			PreparedStatement pstt = connect.prepareStatement(SELECT_ID)){
 			pstt.setString(1, idPseudo);
-			pstt.setString(3, mdp);
+			pstt.setString(2, mdp);
 			
 			ResultSet rsPseudo = pstt.executeQuery();
 
