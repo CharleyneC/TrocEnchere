@@ -19,9 +19,6 @@ import fr.eni.projet.TrocEnchere.dal.DalException;
 import fr.eni.projet.TrocEnchere.dal.UtilisateurDAO;
 import fr.eni.projet.TrocEnchere.dal.UtilisateurDaoJdbcImpl;
 
-/**
- * Servlet implementation class SeConnecterServlet
- */
 @WebServlet("/SeConnecterServlet")
 public class SeConnecterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,22 +32,24 @@ public class SeConnecterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
 		String p = request.getParameter("pseudo");
-	    String em = request.getParameter("email");
 		String m = request.getParameter("mdp");
 
 		// Créer un nouvel UtilisateurManager pour utiliser ses fonctions non instanciées			
 		UtilisateurManager uManager = new UtilisateurManager();
 
+			//ouverture de session
 			HttpSession sessionUser = request.getSession();
 			sessionUser.setAttribute("Utilisateur", uManager);
 
-	
+			//On regarde si les 2 champs sont renseignés
 		try {	
 			if (uManager.selectUser(p, m) != null) {
 
+				//La BDD retrouve à qui appartient le couple Pseudo/Mdp
 				Utilisateur user = uManager.seConnecterUser(p, m);
 				request.setAttribute("Utilisateur", user);
 				
+				//On l'envoie sur sa page de profil
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
 				rd.forward(request, response);
 

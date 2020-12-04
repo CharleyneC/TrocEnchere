@@ -42,8 +42,8 @@ public class UtilisateurManager {
 		
 	}
 	
-	public Utilisateur selectUser(String idUser, String mdp) throws DalException {
-		return uDao.selectId(idUser, mdp);
+	public Utilisateur selectUser(String idPseudo, String mdp) throws DalException {
+		return uDao.selectId(idPseudo, mdp);
 	}
 	
 	public Utilisateur trouverUser () throws DalException{		

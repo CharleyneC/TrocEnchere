@@ -18,14 +18,16 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
 	
+	
+	//On récupère et compare les infos de connexion de l'utilisateur.
 	@Override
-	public Utilisateur selectId(String idUser, String mdp) throws DalException {
+	public Utilisateur selectId(String idPseudo, String mdp) throws DalException {
 		Utilisateur userId = null;
 		
 		try (Connection connect = ConnectionProvider.getConnection();
 			PreparedStatement pstt = connect.prepareStatement(SELECT_ID)){
-			pstt.setString(1, idUser);
-			pstt.setString(2, mdp);
+			pstt.setString(1, idPseudo);
+			pstt.setString(3, mdp);
 			
 			ResultSet rsPseudo = pstt.executeQuery();
 
@@ -79,6 +81,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		
 	}
 	
+	//Trouver les infos des utilisateurs
 	@Override
 	public Utilisateur findAllUtilisateur() throws DalException {
 		Utilisateur userAll = null;
@@ -112,6 +115,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			return userAll;
 	}
 
+	//Envoie et récupération des données de connexions
 	@Override
 	public Utilisateur seConnecter(String pIdentifiant, String pMdp) throws SQLException, DalException {
 		
