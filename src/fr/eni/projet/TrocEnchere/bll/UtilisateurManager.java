@@ -16,11 +16,15 @@ public class UtilisateurManager {
 		uDao = UtilisateurFactory.getUtilisateurDAO();
 	}
 	
+	//Après vérification
+	//L'utilisateur peut etre ajouter à la BDD
 	public void ajouterUser(Utilisateur user) throws BllException {
 		validerUser (user);
 		uDao.addUtilisateur(user);
 	}
 
+	//On vérifie que les informations fournie par l'utilisateur
+	//sont complète et bien celles que l'on demande
 	private void validerUser(Utilisateur user) throws BllException {
 		if(user.getPseudo() != null &&
 			user.getNom() != null &&

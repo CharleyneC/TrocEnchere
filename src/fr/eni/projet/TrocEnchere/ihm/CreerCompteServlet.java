@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.TrocEnchere.bll.UtilisateurManager;
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
-/**
- * Servlet implementation class CreerCompteServlet
- */
 @WebServlet("/CreerCompteServlet")
 public class CreerCompteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,11 +21,13 @@ public class CreerCompteServlet extends HttpServlet {
 
     }
 
+    //On envoi l'utilisateur sur la page ou il pourrat rentrer ses informations
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/creerCompte.jsp");
 		rd.forward(request, response);
 	}
 
+	//On récupère l'intégralité des informations du nouvel utilisateur
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
@@ -45,6 +44,7 @@ public class CreerCompteServlet extends HttpServlet {
 			Utilisateur user = new Utilisateur(pseudo, nom, prenom, eMail, noTel, rue, cpo, ville, mdpUser);
 			UtilisateurManager um = new UtilisateurManager();
 			
+			//On ajoute les infos dans la BDD
 			um.ajouterUser(user);
 			
 		} catch (Exception e) {

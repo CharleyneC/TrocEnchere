@@ -73,6 +73,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		return userEmail;
 	}
 
+	//On sauvegarde les informations envoyé par l'utilisateur en BDD
 	@Override
 	public void addUtilisateur(Utilisateur user) {
 		try (Connection connect = ConnectionProvider.getConnection()) {
