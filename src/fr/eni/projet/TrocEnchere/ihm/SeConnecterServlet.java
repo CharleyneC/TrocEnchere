@@ -38,29 +38,24 @@ public class SeConnecterServlet extends HttpServlet {
 	    String em = request.getParameter("email");
 		String m = request.getParameter("mdp");
 
-		// Créer un nouvel UtilisateurDaoJdbcImpl pour utiliser ses fonctions non instanciées
-		UtilisateurDaoJdbcImpl uUser = new UtilisateurDaoJdbcImpl();
-		
-	
+		// Créer un nouvel UtilisateurManager pour utiliser ses fonctions non instanciées			
 		UtilisateurManager uManager = new UtilisateurManager();
-		try {
-			Utilisateur user = uManager.seConnecterUser("pseudo");
-			request.setAttribute("Utilisateur", user);
-		} catch (SQLException | DalException e1) {
-			e1.printStackTrace();
-		}
+
 			HttpSession sessionUser = request.getSession();
-			sessionUser.setAttribute("Utilisateur", uUser);
+			sessionUser.setAttribute("Utilisateur", uManager);
 
 	
 		try {	
-			if (uUser.selectPseudo(p, m) != null || uUser.selectEmail(em, m) != null ) {
+			if (uManager.selectUser(p, m) != null) {
 
+				Utilisateur user = uManager.seConnecterUser(p, m);
+				request.setAttribute("Utilisateur", user);
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
-				rd.forward(request, response);		
+				rd.forward(request, response);
+
 			}
-			
-		
+					
 		} catch (Exception e) {
 			System.out.println("erreur");
 			System.out.println(e.getMessage());

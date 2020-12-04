@@ -1,7 +1,6 @@
 package fr.eni.projet.TrocEnchere.bll;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 import fr.eni.projet.TrocEnchere.dal.DalException;
@@ -43,12 +42,16 @@ public class UtilisateurManager {
 		
 	}
 	
+	public Utilisateur selectUser(String idUser, String mdp) throws DalException {
+		return uDao.selectId(idUser, mdp);
+	}
+	
 	public Utilisateur trouverUser () throws DalException{		
 		 return uDao.findAllUtilisateur();
 	} 
 
-	public Utilisateur seConnecterUser(String userCo) throws SQLException, DalException {
-		return uDao.seConnecter(userCo);
+	public Utilisateur seConnecterUser(String userCo, String userMdp) throws SQLException, DalException {
+		return uDao.seConnecter(userCo, userMdp);
 	}
 
 }

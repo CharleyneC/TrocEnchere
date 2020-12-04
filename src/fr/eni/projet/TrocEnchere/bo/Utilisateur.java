@@ -54,7 +54,12 @@ public class Utilisateur {
 		this.credit = credit;
 		this.admin = admin;
 	}
-
+	public Utilisateur(String nom, String prenom, int credit) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.credit = credit;
+	}
 	public int getNoUser() {
 		return noUser;
 	}
