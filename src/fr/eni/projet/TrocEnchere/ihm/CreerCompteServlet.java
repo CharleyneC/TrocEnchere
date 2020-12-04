@@ -1,6 +1,7 @@
 package fr.eni.projet.TrocEnchere.ihm;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,6 +51,8 @@ public class CreerCompteServlet extends HttpServlet {
 		} catch (Exception e) {
 			
 		}
+		RequestDispatcher rd = request.getRequestDispatcher("SeConnecterServlet");
+		rd.forward(request, response);
 		
 	}
 
