@@ -11,7 +11,7 @@ public interface UtilisateurDAO {
 	Utilisateur selectEmail(String email, String mdp) throws DalException;
 	void addUtilisateur(Utilisateur user);
 	Utilisateur findAllUtilisateur() throws DalException;
-	List<Utilisateur> seConnecter(Utilisateur userCo) throws SQLException, DalException;
+	Utilisateur seConnecter(String pIdentifiant) throws SQLException, DalException;
 
 
 	

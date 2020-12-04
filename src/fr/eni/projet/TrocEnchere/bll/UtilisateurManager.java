@@ -43,7 +43,7 @@ public class UtilisateurManager {
 		 return uDao.findAllUtilisateur();
 	} 
 
-	public List<Utilisateur> seConnecterUser(Utilisateur userCo) throws SQLException, DalException {
+	public Utilisateur seConnecterUser(String userCo) throws SQLException, DalException {
 		return uDao.seConnecter(userCo);
 	}
 

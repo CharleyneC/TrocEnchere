@@ -12,7 +12,7 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
-	private final String SELECT_ALL = "USE enchere_bdd SELECT * FROM utilisateurs";
+	private final String SELECT_ALL = "USE enchere_bdd SELECT * FROM utilisateurs WHERE pseudo = ?";
 	private final String SELECT_PSEUDO = "use enchere_bdd SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	private final String SELECT_EMAIL = "use enchere_bdd SELECT * FROM utilisateurs WHERE email = ? and mot_de_passe = ?";
 	private final String INSERT_USER = "USE enchere_bdd INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
@@ -30,7 +30,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			
 			ResultSet rsPseudo = pstt.executeQuery();
 
-			if (rsPseudo.next()) {;
+			if (rsPseudo.next()) {
 				String pseudoUser = rsPseudo.getString(2);
 				String email = rsPseudo.getString(5);
 				String mdpUser = rsPseudo.getString(10);
@@ -141,16 +141,16 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public List<Utilisateur> seConnecter(Utilisateur userCo) throws SQLException, DalException {
+	public Utilisateur seConnecter(String pIdentifiant) throws SQLException, DalException {
 		
-		List<Utilisateur> listeUser = new ArrayList<Utilisateur>();
+		Utilisateur userUnique = new Utilisateur();
 		
 		try (Connection connect = ConnectionProvider.getConnection();
 				PreparedStatement pstt = connect.prepareStatement(SELECT_ALL)){
-				
+				pstt.setString(1, pIdentifiant);
 				ResultSet rs = pstt.executeQuery();
 				
-				while(rs.next()) {
+				if(rs.next()) {
 					int noUser = rs.getInt(1);
 					String pseudo = rs.getString(2);
 					String nom = rs.getString(3);
@@ -163,13 +163,14 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 					String mdpUser = rs.getString(10);
 					int credit = rs.getInt(11);
 					byte admin = rs.getByte(12);
-					Utilisateur trouve = new Utilisateur(noUser, pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit, admin);
-					listeUser.add(trouve);
+					
+					userUnique = new Utilisateur(noUser, pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit, admin);
+					System.out.println(userUnique.getNom());
 				}
 				rs.close();
 	}catch(Exception e) {
 		throw new DalException(e.getMessage());
 	}
-	return listeUser;
+	return userUnique;
 }
 }

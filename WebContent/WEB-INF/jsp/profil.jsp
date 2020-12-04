@@ -12,11 +12,11 @@
 </head>
 <body>
 
-	<c:forEach items="${Utilisateur }" var="u">
-		<h1> Bonjour,  ${u.nom} ${u.prenom} !</h1>
+	
+		<h1> Bonjour,  ${Utilisateur.nom} ${Utilisateur.prenom} !</h1>
 		
-		<p> ${u.credit} </p>
-	</c:forEach>
+		<p> ${Utilisateur.credit} </p>
+	
 
 
 
