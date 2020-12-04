@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
@@ -139,9 +141,35 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public Utilisateur seConnecter(Utilisateur userCo) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Utilisateur> seConnecter(Utilisateur userCo) throws SQLException, DalException {
+		
+		List<Utilisateur> listeUser = new ArrayList<Utilisateur>();
+		
+		try (Connection connect = ConnectionProvider.getConnection();
+				PreparedStatement pstt = connect.prepareStatement(SELECT_ALL)){
+				
+				ResultSet rs = pstt.executeQuery();
+				
+				while(rs.next()) {
+					int noUser = rs.getInt(1);
+					String pseudo = rs.getString(2);
+					String nom = rs.getString(3);
+					String prenom = rs.getString(4);
+					String emailUser = rs.getString(5);
+					String noTel = rs.getString(6);
+					String rue = rs.getString(7);
+					String cpo = rs.getString(8);
+					String ville = rs.getString(9);
+					String mdpUser = rs.getString(10);
+					int credit = rs.getInt(11);
+					byte admin = rs.getByte(12);
+					Utilisateur trouve = new Utilisateur(noUser, pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit, admin);
+					listeUser.add(trouve);
+				}
+				rs.close();
+	}catch(Exception e) {
+		throw new DalException(e.getMessage());
 	}
-	
+	return listeUser;
+}
 }
