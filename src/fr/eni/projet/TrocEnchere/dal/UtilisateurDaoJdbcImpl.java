@@ -37,6 +37,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			}else {
 				System.out.println("Pseudo ou mot de passe non reconnu!");
 			}
+			pstt.close();
 			rsPseudo.close();			
 		}catch(Exception e) {
 			throw new DalException(e.getMessage());
@@ -64,6 +65,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			}else {
 				System.out.println("Pseudo ou mot de passe non reconnu!");
 			}
+			pstt.close();
 			rsEmail.close();			
 		}catch(Exception e) {
 			throw new DalException(e.getMessage());
@@ -94,6 +96,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 				int id = rsAdd.getInt(1);
 				user.setNoUser(id);
 			}
+			rsAdd.close();
 			pstt.close();
 			
 		} catch (SQLException e) {
@@ -111,7 +114,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 				
 				ResultSet rs = pstt.executeQuery();
 
-				if (rs.next()) {
+				if (rs.next()) {	
 					int noUser = rs.getInt(1);
 					String pseudo = rs.getString(2);
 					String nom = rs.getString(3);
@@ -126,14 +129,19 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 					byte admin = rs.getByte(12);
 					
 					userAll = new Utilisateur(noUser, pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit, admin);
-				}else {
-					System.out.println("Pseudo ou mot de passe non reconnu!");
 				}
-				rs.close();			
+				rs.close();	
+				pstt.close();
 			}catch(Exception e) {
 				throw new DalException(e.getMessage());
 			}
 			return userAll;
+	}
+
+	@Override
+	public Utilisateur seConnecter(Utilisateur userCo) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

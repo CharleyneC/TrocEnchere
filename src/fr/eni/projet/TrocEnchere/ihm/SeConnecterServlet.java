@@ -2,6 +2,7 @@ package fr.eni.projet.TrocEnchere.ihm;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,15 +39,16 @@ public class SeConnecterServlet extends HttpServlet {
 
 		// Créer un nouvel UtilisateurDaoJdbcImpl pour utiliser ses fonctions non instanciées
 		UtilisateurDaoJdbcImpl uUser = new UtilisateurDaoJdbcImpl();
-		
+		Utilisateur userCO = new Utilisateur();		
 		UtilisateurManager um = new UtilisateurManager();
+		
 		try {
-			Utilisateur userU = um.trouverUser();
+			Utilisateur userU = um.seConnecterUser(userCO);	
 			HttpSession sessionUser = request.getSession();
 			
 			sessionUser.setAttribute("Utilisateur", userU);
 
-		} catch (DalException e1) {
+		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 	

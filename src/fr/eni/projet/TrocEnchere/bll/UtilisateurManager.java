@@ -1,5 +1,7 @@
 package fr.eni.projet.TrocEnchere.bll;
 
+import java.sql.SQLException;
+
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 import fr.eni.projet.TrocEnchere.dal.DalException;
 import fr.eni.projet.TrocEnchere.dal.UtilisateurDAO;
@@ -30,14 +32,18 @@ public class UtilisateurManager {
 			user.getVille() != null &&
 			user.getMdp() != null) {
 		}else {
-			BllException ex = new BllException("Les champs ne sont correctement renseignés");
+			BllException ex = new BllException("Les champs ne sont pas correctement renseignés");
 			throw ex;	
 		}
 		
 	}
 	
-	public Utilisateur trouverUser () throws DalException{
+	public Utilisateur trouverUser () throws DalException{		
 		 return uDao.findAllUtilisateur();
 	} 
+
+	public Utilisateur seConnecterUser(Utilisateur userCo) throws SQLException {
+		return uDao.seConnecter(userCo);
+	}
 
 }
