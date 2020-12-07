@@ -60,12 +60,15 @@
                  
 </div>
 	                
-<form class="form-bouton" method="post" action="update">
+<form class="form-bouton" method="get" action="update">
 	<input type="submit" value="Modifier mon profil"/>
 </form>
 
 <form class="form-bouton" method="post" action="SeDeconnecterServlet">
 	<input type="submit" value="Deconnexion"/>
+</form>
+<form class="form-bouton" method="post" action="supprimer profil">
+	<input type="submit" value="supprimer"/>
 </form>
 	
 <footer class="border-top text-center align-bottom">
@@ -75,8 +78,6 @@
                 <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
             </div>
  </footer>
-
-		<a href="WEB-INF/jsp/supprimerProfil.jsp"><button> Supprimer Votre Profil </button></a>
 
 </body>
 </html>
