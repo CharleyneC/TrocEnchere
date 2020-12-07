@@ -11,10 +11,12 @@ public interface UtilisateurDAO {
 	void addUtilisateur(Utilisateur user);
 	Utilisateur findAllUtilisateur() throws DalException;
 	Utilisateur seConnecter(String pIdentifiant, String pMdp) throws SQLException, DalException;
+<<<<<<< HEAD
 	Utilisateur DeleteProfil(Utilisateur userDelete) throws SQLException;
+=======
+	Utilisateur updateProfil(Utilisateur userUpdate) throws SQLException;
+>>>>>>> branch 'master' of https://github.com/CharleyneC/TrocEnchere.git
 	
 	
 
-
-	
 }

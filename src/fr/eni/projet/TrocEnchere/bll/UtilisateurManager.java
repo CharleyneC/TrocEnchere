@@ -53,5 +53,10 @@ public class UtilisateurManager {
 	public Utilisateur seConnecterUser(String userCo, String userMdp) throws SQLException, DalException {
 		return uDao.seConnecter(userCo, userMdp);
 	}
+	
+	public Utilisateur updateProfil() throws SQLException {
+		return uDao.updateProfil(null);
+		
+	}
 
 }

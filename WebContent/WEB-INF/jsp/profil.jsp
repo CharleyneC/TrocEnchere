@@ -76,6 +76,9 @@
             </div>
  </footer>
 
+<<<<<<< HEAD
 		<a href="WEB-INF/jsp/supprimerProfil.jsp"><button> Supprimer Votre Profil </button></a>
+=======
+>>>>>>> branch 'master' of https://github.com/CharleyneC/TrocEnchere.git
 </body>
 </html>
