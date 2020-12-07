@@ -22,7 +22,7 @@ public class ModificationProfilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageModifierProfil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
 		rd.forward(request, response);
 		
 	}

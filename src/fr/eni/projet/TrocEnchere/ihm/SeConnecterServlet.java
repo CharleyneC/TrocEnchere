@@ -34,18 +34,18 @@ public class SeConnecterServlet extends HttpServlet {
 		String p = request.getParameter("pseudo");
 		String m = request.getParameter("mdp");
 
-		// Créer un nouvel UtilisateurManager pour utiliser ses fonctions non instanciées			
+		// Crï¿½er un nouvel UtilisateurManager pour utiliser ses fonctions non instanciï¿½es			
 		UtilisateurManager uManager = new UtilisateurManager();
 
 			//ouverture de session
-			HttpSession sessionUser = request.getSession();
+			HttpSession sessionUser = request.getSession(true);
 			sessionUser.setAttribute("Utilisateur", uManager);
 
-			//On regarde si les 2 champs sont renseignés
+			//On regarde si les 2 champs sont renseignï¿½s
 		try {	
 			if (uManager.selectUser(p, m) != null) {
 
-				//La BDD retrouve à qui appartient le couple Pseudo/Mdp
+				//La BDD retrouve ï¿½ qui appartient le couple Pseudo/Mdp
 				Utilisateur user = uManager.seConnecterUser(p, m);
 				request.setAttribute("Utilisateur", user);
 				

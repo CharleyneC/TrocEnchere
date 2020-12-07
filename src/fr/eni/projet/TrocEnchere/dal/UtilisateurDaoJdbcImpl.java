@@ -12,14 +12,16 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
 	private final String SELECT_ALL = "USE enchere_bdd SELECT * FROM utilisateurs";
-	private final String SELECT_PROFIL ="USE enchere_bdd SELECT nom, prenom, credit FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+	private final String SELECT_PROFIL ="USE enchere_bdd SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	private final String SELECT_ID = "USE enchere_bdd SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	private final String INSERT_USER = "USE enchere_bdd INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
 										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
+	private final String DELETE  = "USE enchere_bdd DELETE * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	
 	
-	//On récupère et compare les infos de connexion de l'utilisateur.
+	
+	//On rï¿½cupï¿½re et compare les infos de connexion de l'utilisateur.
 	@Override
 	public Utilisateur selectId(String idPseudo, String mdp) throws DalException {
 		Utilisateur userId = null;
@@ -48,7 +50,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		return userId;
 	}
 	
-	//On sauvegarde les informations envoyé par l'utilisateur en BDD
+	//On sauvegarde les informations envoyï¿½ par l'utilisateur en BDD
 	@Override
 	public void addUtilisateur(Utilisateur user) {
 		try (Connection connect = ConnectionProvider.getConnection()) {
@@ -115,7 +117,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			return userAll;
 	}
 
-	//Envoie et récupération des données de connexions
+	//Envoie et rï¿½cupï¿½ration des donnï¿½es de connexions
 	@Override
 	public Utilisateur seConnecter(String pIdentifiant, String pMdp) throws SQLException, DalException {
 		
@@ -128,11 +130,18 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 				ResultSet rs = pstt.executeQuery();
 				
 				if(rs.next()) {
-					String nom = rs.getString("nom");
-					String prenom = rs.getString("prenom");
-					int credit = rs.getInt("credit");
-					
-					userUnique = new Utilisateur(nom, prenom, credit);
+					String pseudo = rs.getString(1);
+					String nom = rs.getString(2);
+					String prenom = rs.getString(3);
+					String emailUser = rs.getString(4);
+					String noTel = rs.getString(5);
+					String rue = rs.getString(6);
+					String cpo = rs.getString(7);
+					String ville = rs.getString(8);
+					String mdpUser = rs.getString(9);
+					int credit = rs.getInt(10);
+
+					userUnique = new Utilisateur(pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit);
 				}
 				rs.close();
 	}catch(Exception e) {
@@ -141,4 +150,5 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	return userUnique;
 }
 
+}
 }
