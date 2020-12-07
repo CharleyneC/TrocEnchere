@@ -12,11 +12,13 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
 	private final String SELECT_ALL = "USE enchere_bdd SELECT * FROM utilisateurs";
-	private final String SELECT_PROFIL ="USE enchere_bdd SELECT nom, prenom, credit FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+	private final String SELECT_PROFIL ="USE enchere_bdd SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	private final String SELECT_ID = "USE enchere_bdd SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	private final String INSERT_USER = "USE enchere_bdd INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
 										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
+	private final String UPDATE_USER = "Use enchere_bdd UPDATE utilisateurs "
+										+ "	SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, ville = ?, mot_de_passe = ?";
 	
 	
 	//On récupère et compare les infos de connexion de l'utilisateur.
@@ -51,6 +53,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	//On sauvegarde les informations envoyé par l'utilisateur en BDD
 	@Override
 	public void addUtilisateur(Utilisateur user) {
+		
 		try (Connection connect = ConnectionProvider.getConnection()) {
 			PreparedStatement pstt = connect.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
 			pstt.setString(1, user.getPseudo());
@@ -128,11 +131,18 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 				ResultSet rs = pstt.executeQuery();
 				
 				if(rs.next()) {
-					String nom = rs.getString("nom");
-					String prenom = rs.getString("prenom");
-					int credit = rs.getInt("credit");
-					
-					userUnique = new Utilisateur(nom, prenom, credit);
+					String pseudo = rs.getString(1);
+					String nom = rs.getString(2);
+					String prenom = rs.getString(3);
+					String emailUser = rs.getString(4);
+					String noTel = rs.getString(5);
+					String rue = rs.getString(6);
+					String cpo = rs.getString(7);
+					String ville = rs.getString(8);
+					String mdpUser = rs.getString(9);
+					int credit = rs.getInt(10);
+
+					userUnique = new Utilisateur(pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit);
 				}
 				rs.close();
 	}catch(Exception e) {
@@ -140,5 +150,35 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	}
 	return userUnique;
 }
+
+	//Modifier les infos de l'utilisateur
+	@Override	
+	public Utilisateur updateProfil (Utilisateur userUpdate) throws SQLException {
+		
+		
+		try (Connection connect = ConnectionProvider.getConnection();
+				PreparedStatement pstt = connect.prepareStatement(UPDATE_USER)){
+			
+			pstt.setString(1, userUpdate.getPseudo());
+			pstt.setString(2, userUpdate.getNom());
+			pstt.setString(3, userUpdate.getPrenom());
+			pstt.setString(4, userUpdate.getEmail());
+			pstt.setString(5, userUpdate.getNoTel());
+			pstt.setString(6, userUpdate.getRue());
+			pstt.setString(7, userUpdate.getCpo());
+			pstt.setString(8, userUpdate.getVille());
+			pstt.setString(9, userUpdate.getMdp());
+			
+			pstt.executeUpdate();
+			
+			
+	}catch (Exception e) {
+		e.printStackTrace();
+	}
+		return userUpdate;
+	
+}
+
+	
 
 }

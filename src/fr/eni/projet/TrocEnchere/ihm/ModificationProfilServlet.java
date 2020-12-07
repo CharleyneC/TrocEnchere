@@ -29,17 +29,23 @@ public class ModificationProfilServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		UtilisateurManager um = new UtilisateurManager();
-		
 		try {
-			Utilisateur userU = um.trouverUser();
-			HttpSession sessionUser = request.getSession();
+		String pseudo = request.getParameter("pseudo");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String eMail = request.getParameter("email");
+		String noTel = request.getParameter("tel");
+		String rue = request.getParameter("rue");
+		String cpo = request.getParameter("cpo");
+		String ville = request.getParameter("ville");
+		String mdpUser = request.getParameter("mdp");
+		
+		Utilisateur updateProfil = new Utilisateur(pseudo, nom, prenom, eMail, noTel, rue, cpo, ville, mdpUser);
 			
-			sessionUser.setAttribute("Utilisateur", userU);
-
-		} catch (DalException e1) {
-			e1.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		
 	}
 	
 	

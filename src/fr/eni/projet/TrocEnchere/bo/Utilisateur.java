@@ -60,6 +60,8 @@ public class Utilisateur {
 		this.prenom = prenom;
 		this.credit = credit;
 	}
+
+	
 	public int getNoUser() {
 		return noUser;
 	}
