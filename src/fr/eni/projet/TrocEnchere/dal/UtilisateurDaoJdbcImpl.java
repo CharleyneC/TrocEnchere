@@ -11,13 +11,13 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
-	private final String SELECT_ALL = "USE enchere_bdd SELECT * FROM utilisateurs";
-	private final String SELECT_PROFIL ="USE enchere_bdd SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
-	private final String SELECT_ID = "USE enchere_bdd SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
-	private final String INSERT_USER = "USE enchere_bdd INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
+	private final String SELECT_ALL = "SELECT * FROM utilisateurs";
+	private final String SELECT_PROFIL ="SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+	private final String SELECT_ID = "SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+	private final String INSERT_USER = "INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
 										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
-	private final String UPDATE_USER = "Use enchere_bdd UPDATE utilisateurs "
+	private final String UPDATE_USER = "UPDATE utilisateurs "
 										+ "	SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, ville = ?, mot_de_passe = ?";
 	
 	
