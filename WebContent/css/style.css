@@ -56,9 +56,14 @@
 }
 /* Ecran Index*/
 .form-filter {
+	
 	width: 100%;
 	max-width: 500px;
-	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-bouton{
+	display: inline-block;
 	margin: 0 auto;
 }
 

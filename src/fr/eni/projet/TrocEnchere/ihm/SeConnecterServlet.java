@@ -38,7 +38,7 @@ public class SeConnecterServlet extends HttpServlet {
 		UtilisateurManager uManager = new UtilisateurManager();
 
 			//ouverture de session
-			HttpSession sessionUser = request.getSession();
+			HttpSession sessionUser = request.getSession(true);
 			sessionUser.setAttribute("Utilisateur", uManager);
 
 			//On regarde si les 2 champs sont renseignés
