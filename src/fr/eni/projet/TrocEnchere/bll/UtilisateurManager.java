@@ -54,8 +54,8 @@ public class UtilisateurManager {
 		return uDao.seConnecter(userCo, userMdp);
 	}
 	
-	public Utilisateur updateProfil() throws SQLException {
-		return uDao.updateProfil(null);
+	public Utilisateur updateProfil(Utilisateur userUpdate) throws SQLException {
+		return uDao.updateProfil(userUpdate);
 		
 	}
 
