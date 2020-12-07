@@ -40,7 +40,7 @@
 
 <p> Etes-vous sûr de vouloir supprimer votre profil ?</p>
 
-<form action="supprimerProfil" action="delete" method="get">
+<form action="supprimerProfil" action="delete" method="post">
 <button type="submit"> OUI</button>
 </form>
 

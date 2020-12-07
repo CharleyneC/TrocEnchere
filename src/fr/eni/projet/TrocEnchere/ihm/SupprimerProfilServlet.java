@@ -8,6 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.eni.projet.TrocEnchere.bll.UtilisateurManager;
+import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class SupprimerProfilServlet
@@ -37,8 +41,32 @@ public class SupprimerProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		UtilisateurManager uM = new UtilisateurManager();
+		
+		String p = request.getParameter("pseudo");
+		String m = request.getParameter("mdp");
+		
+		//On recupère la connexion
+		HttpSession sessionUser = request.getSession(true);
+		sessionUser.setAttribute("Utilisateur", uM);
+		
+		//on efface 
+		try {
+			if (uM.selectUser (p, m)!= null) {
+				
+				//La BDD retrouve à l'utilisateur  avec pseudo et mdp
+				Utilisateur user = uM.deleteProfil(p, m);
+				
+				}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			
 	}
-
+				//On renvoie sur la page d'accueil
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageAccueil.jsp");
+				rd.forward(request, response);
+}
+	
 }

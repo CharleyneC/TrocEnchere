@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
 
@@ -21,7 +22,10 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 										+ "	SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, ville = ?, mot_de_passe = ?";
 	
 	
-	//On récupère et compare les infos de connexion de l'utilisateur.
+	private final String DELETE_USER = "DELETE * FROM Utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+	
+	
+	//On rï¿½cupï¿½re et compare les infos de connexion de l'utilisateur.
 	@Override
 	public Utilisateur selectId(String idPseudo, String mdp) throws DalException {
 		Utilisateur userId = null;
@@ -50,7 +54,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		return userId;
 	}
 	
-	//On sauvegarde les informations envoyé par l'utilisateur en BDD
+	//On sauvegarde les informations envoyï¿½ par l'utilisateur en BDD
 	@Override
 	public void addUtilisateur(Utilisateur user) {
 		
@@ -118,7 +122,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 			return userAll;
 	}
 
-	//Envoie et récupération des données de connexions
+	//Envoie et rï¿½cupï¿½ration des donnï¿½es de connexions
 	@Override
 	public Utilisateur seConnecter(String pIdentifiant, String pMdp) throws SQLException, DalException {
 		
@@ -180,7 +184,25 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 }
 
 	@Override
-	public Utilisateur DeleteProfil(Utilisateur userDelete) throws SQLException {
+	public void DeleteProfil(Utilisateur userDelete) throws SQLException {
+		
+		try (Connection connect = ConnectionProvider.getConnection();
+				PreparedStatement pstt = connect.prepareStatement(DELETE_USER)){
+			
+			pstt.executeUpdate(DELETE_USER);
+			
+			connect.close();
+			
+			
+	}catch (Exception e) {
+		e.printStackTrace();
+	
+	}
+
+}
+
+	@Override
+	public Utilisateur userDelete(String p, String m) {
 		// TODO Auto-generated method stub
 		return null;
 	}
