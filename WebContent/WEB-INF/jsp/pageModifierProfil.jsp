@@ -39,30 +39,42 @@
         </header>
 
 	
-	<form class="update-Profil" action="update" method="get">
-		<label for="pseudo">Pseudo: ${Utilisateur.pseudo }</label>
+	<form class="update-Profil" action="update" method="post">
+		<label for="pseudo">Pseudo:</label>
+		
 		<input type="text" id="pseudo" name="pseudo" /><br>
- 		<label for="prenom">Prénom: ${Utilisateur.prenom }</label>
+ 		<label for="prenom">Prénom:</label>
+ 		
 		<input type="text" id="prenom" name="prenom"/><br>
-		<label for="nom">Nom: ${Utilisateur.nom }</label>
+		<label for="nom">Nom: </label>
+		
 		<input type="text" id="nom" name="nom"/><br>
-		<label for="mailto"> Email: ${Utilisateur.email }</label>
+		<label for="mailto"> Email:</label>
+		
 		<input type="text" id="mailto" name="Email"/><br>
-		<label for="numero">Téléphone: ${Utilisateur.telephone }</label>
+		<label for="numero">Téléphone:</label>
+		
 		<input type="text" id="numero" name="telephone"/><br>
-		<label for="rue">Rue: ${Utilisateur.rue }</label>
+		<label for="rue">Rue: </label>
+		
 		<input type="text" id="rue" name="rue"/><br>
-		<label for="cdp">Code Postal: ${Utilisateur.cdp }</label>
+		<label for="cdp">Code Postal: </label>
+		
 		<input type="text" id="cdp" name="cdp"/><br>
-		<label for="ville">Ville: ${Utilisateur.ville }</label>
+		<label for="ville">Ville: </label>
+		
 		<input type="text" id="ville" name="ville"/><br>
-		<label for="password">Mot de passe actuel:: ${Utilisateur.mdp }</label>
+		<label for="password">Mot de passe actuel: </label>
+		
 		<input type="password" id="password" name="mdp"/><br>
-		<label for="newPassword">Nouveau Mot de passe: ${Utilisateur.newMdp }</label>
+		<label for="newPassword">Nouveau Mot de passe: </label>
+		
 		<input type="password" id="newPassword" name="newMdp"/><br>
-		<label for="confirmationMdp">Confirmation: ${Utilisateur.confirmationMdp }</label>
+		<label for="confirmationMdp">Confirmation: </label>
+		
 		<input type="password" id="confirmationMdp" name="confirmationMdp"/><br>
 		<label for="credit">Crédit:</label></br>
+		
 	
 	
 	<button type="submit"> Enregistrer</button>
