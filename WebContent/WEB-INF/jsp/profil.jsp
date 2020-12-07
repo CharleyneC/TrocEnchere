@@ -69,7 +69,7 @@
 </form>
 <form class="form-bouton" method="post" action="supprimer profil">
 	<input type="submit" value="supprimer"/>
-</form>
+</form> 
 	
 <footer class="border-top text-center align-bottom">
             <div class="mt-3">
