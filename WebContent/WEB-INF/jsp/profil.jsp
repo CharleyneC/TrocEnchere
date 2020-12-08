@@ -63,7 +63,7 @@
 <form class="form-bouton" method="post" action="SeDeconnecterServlet">
 	<input type="submit" value="Deconnexion"/>
 </form>
-<form class="form-bouton" method="post" action="supprimer profil">
+<form class="form-bouton" method="get" action="Supprimer">
 	<input type="submit" value="supprimer"/>
 </form> 
 	

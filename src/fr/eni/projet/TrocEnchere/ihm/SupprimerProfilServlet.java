@@ -20,52 +20,38 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 public class SupprimerProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public SupprimerProfilServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/supprimerProfil.jsp");
 		rd.forward(request, response);
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		UtilisateurManager uM = new UtilisateurManager();
-		
-		String p = request.getParameter("pseudo");
-		String m = request.getParameter("mdp");
-		
-		//On recupère la connexion
-		HttpSession sessionUser = request.getSession(true);
-		sessionUser.setAttribute("Utilisateur", uM);
-		
+			UtilisateurManager deleteUser = new UtilisateurManager ();
+			
+			String p = request.getParameter("pseudo");
+			
 		//on efface 
 		try {
-			if (uM.selectUser (p, m)!= null) {
 				
-				//La BDD retrouve à l'utilisateur  avec pseudo et mdp
-				Utilisateur user = uM.deleteProfil(p, m);
+				deleteUser.effacer(p);
 				
-				}
+			
 				
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 	}
 				//On renvoie sur la page d'accueil
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageAccueil.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("LancerApplicationServlet");
 				rd.forward(request, response);
 }
 	
