@@ -29,33 +29,51 @@ public class ModificationProfilServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String choix = request.getParameter("choix");
+
+		if (choix.equals("valider")) {
+			request.setAttribute("Modification OK", "Votre profil vient d'être modifié");
+			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/acceuil.jsp").forward(request, response);
+
+		} else {
+
+			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profil.jsp").forward(request, response);
+		}
+		
+		
 		try {
+			
+			Utilisateur utilisateur = new Utilisateur();
+			
+			// Je recupère les informations en paramètres
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
-			String eMail = request.getParameter("email");
+			String email = request.getParameter("email");
 			String noTel = request.getParameter("tel");
 			String rue = request.getParameter("rue");
 			String cpo = request.getParameter("cpo");
 			String ville = request.getParameter("ville");
 			String mdpUser = request.getParameter("mdp");
 			
-			Utilisateur updateUser = new Utilisateur(pseudo, nom, prenom, eMail, noTel, rue, cpo, ville, mdpUser);
-			UtilisateurManager updateUM = new UtilisateurManager();
-		
-			//On ajoute les modifications � la BDD
-			updateUM.updateProfil(updateUser);
+			HttpSession session = request.getSession();
+			
+			// J'ajoute les nouvelles données à la BDD
+			try {
+				UtilisateurManager.updateProfil(pseudo, nom, prenom, email, noTel, rue, cpo, ville, mdpUser, (int) session.getAttribute("numUtilisateur"));
+			}catch (DalException e) {
 				
-		
-			}catch(Exception e) {
-				e.printStackTrace();
+				RequestDispatcher rd = request.getRequestDispatcher("profil.jsp");
+				rd.forward(request, response);
 			}
 			
-			RequestDispatcher rd = request.getRequestDispatcher("SeConnecterServlet");
-			rd.forward(request, response);
-		
+		}finally {
+			
 		}
-	
-	
-	
+	}
+		
+		
 }
+	
+	
+

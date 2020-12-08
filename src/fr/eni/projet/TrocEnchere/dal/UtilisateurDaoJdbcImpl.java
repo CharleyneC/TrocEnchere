@@ -18,10 +18,10 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private final String INSERT_USER = "INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
 										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
-	private final String UPDATE_USER = "UPDATE utilisateurs SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, ville = ?, mot_de_passe = ? WHERE  no_utilisateur = ?";
+	private final String UPDATE_USER = "UPDATE utilisateurs SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE  no_utilisateur = ?";
 	
 	
-	private final String DELETE_USER = "DELETE FROM Utilisateurs WHERE pseudo = ?";
+	private final String DELETE_USER = "DELETE * FROM Utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	
 	
 	//On r�cup�re et compare les infos de connexion de l'utilisateur.
@@ -153,52 +153,60 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	}
 	return userUnique;
 }
+	
+	@Override
+	public void deleteProfil(Utilisateur userDelete) throws SQLException {
+		
+		try (Connection connect = ConnectionProvider.getConnection();
+				PreparedStatement pstt = connect.prepareStatement(DELETE_USER)){
+			
+			pstt.executeUpdate(DELETE_USER);
+			
+			pstt.close();
+			
+			
+	}catch (Exception e) {
+		e.printStackTrace();
+	
+	}
+
+}
 
 	//Modifier les infos de l'utilisateur
-	@Override	
-	public Utilisateur updateProfil (Utilisateur userUpdate) throws SQLException{
+
+	public int updateProfil(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String cpo, String ville, String mdp, int numUtilisateur) throws DalException {
 		
 		
 		try (Connection connect = ConnectionProvider.getConnection();
 				PreparedStatement pstt = connect.prepareStatement(UPDATE_USER)){
 			
-			pstt.setString(1, userUpdate.getPseudo());
-			pstt.setString(2, userUpdate.getNom());
-			pstt.setString(3, userUpdate.getPrenom());
-			pstt.setString(4, userUpdate.getEmail());
-			pstt.setString(5, userUpdate.getNoTel());
-			pstt.setString(6, userUpdate.getRue());
-			pstt.setString(7, userUpdate.getCpo());
-			pstt.setString(8, userUpdate.getVille());
-			pstt.setString(9, userUpdate.getMdp());
-			
-			pstt.executeUpdate();
-			
-			
-	}catch (Exception e) {
-		e.printStackTrace();
-	}
-		return userUpdate;
+				int utilisateurUpdate = 0;
+				
+				pstt.setString(1, pseudo);
+				pstt.setString(2, nom);
+				pstt.setString(3, prenom);
+				pstt.setString(4, email);
+				pstt.setString(5, telephone);
+				pstt.setString(6, rue);
+				pstt.setString(7, cpo);
+				pstt.setString(8, ville);
+				pstt.setString(9, mdp);
+				pstt.setInt(10, numUtilisateur);
+				
+				pstt.executeUpdate();
+				
+				return utilisateurUpdate ;
 	
-}
-
-	@Override
-	public void deleteProfil(String p) throws SQLException {
-
+					
+			}catch (SQLException e) {
+				throw new DalException("Ne peut pas etre modifier");
+			}
 		
-		try (Connection connect = ConnectionProvider.getConnection();
-				PreparedStatement pstt = connect.prepareStatement(DELETE_USER)){
-			pstt.setString(1, p);
-			pstt.executeUpdate();
-			pstt.close();
-			
-			
-	}catch (SQLException e) {
-		System.out.println(e.getMessage());
+		}
+
+
+
 	
+		
 	}
-			
-	}		
-}
-	
-	
