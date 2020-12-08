@@ -3,14 +3,8 @@
 <%@ page import="fr.eni.projet.TrocEnchere.bo.Utilisateur" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!-- Bootstrap CSS -->
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
-    <!-- Personnal CSS-->
     <link rel="stylesheet" href="css/style.css">
-
-    <!--icons-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
  
 <!DOCTYPE html>
@@ -23,11 +17,10 @@
 <body>
 <header>
     <nav class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
-        <a class="navbar-brand" href="update">
+        <a class="navbar-brand" href="LancerApplicationServlet">
             <img class="small-icon" src="images/trocenchere.svg" alt="Accueil ENI-Encheres">
             <strong>Modifier mon profil</strong>
         </a>
-        <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
             <img class="small-icon" src="images/user.svg">
             <span class="align-middle text-muted">${Utilisateur.nom} ${Utilisateur.prenom}, ${Utilisateur.credit}</span>
         </a>
@@ -67,7 +60,6 @@
 	<input type="submit" value="Modifier mon profil"/>
 	
 </form>
-
 <form class="form-bouton" method="post" action="SeDeconnecterServlet">
 	<input type="submit" value="Deconnexion"/>
 </form>
