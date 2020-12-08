@@ -31,7 +31,7 @@
                     <img class="small-icon" src="images/trocenchere.svg" alt="Accueil ENI-Encheres">
                     <strong>Modifier mon profil</strong>
                 </a>
-                <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
+                <a class="navbar-brand" href="pageModifierProfil.jsp" alt="Gérer mon profil" title="Gérer mon profil">
                     <img class="small-icon" src="images/user.svg">
                     <span class="align-middle text-muted">${Utilisateur.nom} ${Utilisateur.pseudo}, ${Utilisateur.credit}</span>
                 </a>

@@ -18,8 +18,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private final String INSERT_USER = "INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
 										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
-	private final String UPDATE_USER = "UPDATE utilisateurs "
-										+ "	SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, ville = ?, mot_de_passe = ?";
+	private final String UPDATE_USER = "UPDATE utilisateurs SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, ville = ?, mot_de_passe = ? WHERE  no_utilisateur = ?";
 	
 	
 	private final String DELETE_USER = "DELETE FROM Utilisateurs WHERE pseudo = ?";
@@ -157,7 +156,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
 	//Modifier les infos de l'utilisateur
 	@Override	
-	public Utilisateur updateProfil (Utilisateur userUpdate) throws SQLException {
+	public Utilisateur updateProfil (Utilisateur userUpdate) throws SQLException{
 		
 		
 		try (Connection connect = ConnectionProvider.getConnection();
