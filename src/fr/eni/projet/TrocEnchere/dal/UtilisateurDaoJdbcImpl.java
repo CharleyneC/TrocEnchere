@@ -22,7 +22,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 										+ "	SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, ville = ?, mot_de_passe = ?";
 	
 	
-	private final String DELETE_USER = "DELETE * FROM Utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+	private final String DELETE_USER = "DELETE FROM Utilisateurs WHERE pseudo = ?";
 	
 	
 	//On r�cup�re et compare les infos de connexion de l'utilisateur.
@@ -184,27 +184,22 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 }
 
 	@Override
-	public void DeleteProfil(Utilisateur userDelete) throws SQLException {
+	public void deleteProfil(String p) throws SQLException {
+
 		
 		try (Connection connect = ConnectionProvider.getConnection();
 				PreparedStatement pstt = connect.prepareStatement(DELETE_USER)){
+			pstt.setString(1, p);
+			pstt.executeUpdate();
+			pstt.close();
 			
-			pstt.executeUpdate(DELETE_USER);
 			
-			connect.close();
-			
-			
-	}catch (Exception e) {
-		e.printStackTrace();
+	}catch (SQLException e) {
+		System.out.println(e.getMessage());
 	
 	}
-
+			
+	}		
 }
-
-	@Override
-	public Utilisateur userDelete(String p, String m) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-}
+	
+	

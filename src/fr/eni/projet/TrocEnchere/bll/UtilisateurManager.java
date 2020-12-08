@@ -59,8 +59,8 @@ public class UtilisateurManager {
 		
 	}
 
-	public Utilisateur deleteProfil(String p, String m) {
-		return uDao.userDelete(p, m);
+	public void effacer(String p) throws SQLException {
+		uDao.deleteProfil(p);
 	}
 
 }
