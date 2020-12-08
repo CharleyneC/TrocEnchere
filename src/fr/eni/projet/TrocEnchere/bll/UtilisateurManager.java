@@ -10,7 +10,7 @@ import fr.eni.projet.TrocEnchere.dal.UtilisateurFactory;
 public class UtilisateurManager {
 	
 	// Cr�ation variable uDao pour r�cup�rer l'utilisateur dans la BDD
-	private UtilisateurDAO uDao;
+	private static UtilisateurDAO uDao;
 
 	public UtilisateurManager() {
 		uDao = UtilisateurFactory.getUtilisateurDAO();
@@ -54,13 +54,13 @@ public class UtilisateurManager {
 		return uDao.seConnecter(userCo, userMdp);
 	}
 	
-	public Utilisateur updateProfil(Utilisateur userUpdate) throws SQLException {
-		return uDao.updateProfil(userUpdate);
-		
+	
+	public void effacer(Utilisateur userDelete) throws SQLException {
+		uDao.deleteProfil(userDelete);
 	}
 
-	public void effacer(String p) throws SQLException {
-		uDao.deleteProfil(p);
+	public static int updateProfil(String pseudo, String nom,String prenom,String email,String telephone,String rue,String cp,String ville,String mdp, int numUtilisateur) throws DalException {
+		return uDao.updateProfil(pseudo, nom, prenom, email, telephone, rue, cp, ville, mdp, numUtilisateur);
 	}
 
 }

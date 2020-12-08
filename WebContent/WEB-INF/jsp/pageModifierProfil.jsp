@@ -31,52 +31,51 @@
                     <img class="small-icon" src="images/trocenchere.svg" alt="Accueil ENI-Encheres">
                     <strong>Modifier mon profil</strong>
                 </a>
-                <a class="navbar-brand" href="pageModifierProfil.jsp" alt="Gérer mon profil" title="Gérer mon profil">
+                <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
                     <img class="small-icon" src="images/user.svg">
-                    <span class="align-middle text-muted">${Utilisateur.nom} ${Utilisateur.pseudo}, ${Utilisateur.credit}</span>
+                    <span class="align-middle text-muted"><%-- ${Utilisateur.nom} ${Utilisateur.pseudo}, ${Utilisateur.credit} --%></span>
                 </a>
             </nav>
         </header>
 
+	<form action="update" method="post">
 	
-		<input type="text" id="pseudo" name="pseudo" /><br>
- 		<label for="prenom">Prénom:</label>
- 		
-		<input type="text" id="prenom" name="prenom"/><br>
-		<label for="nom">Nom: </label>
+		<label>Pseudo</label>
+		<input type="text" name="pseudo" required="required"/><br>
 		
-		<input type="text" id="nom" name="nom"/><br>
-		<label for="mailto"> Email:</label>
+ 		<label>Prénom:</label>
+		<input type="text"  name="prenom" required="required"/><br>
 		
-		<input type="text" id="mailto" name="Email"/><br>
-		<label for="numero">Téléphone:</label>
+		<label>Nom: </label>		
+		<input type="text" name="nom" required="required"/><br>
 		
-		<input type="text" id="numero" name="telephone"/><br>
-		<label for="rue">Rue: </label>
+		<label> Email:</label>		
+		<input type="email"  name="email" required="required"/><br>
 		
-		<input type="text" id="rue" name="rue"/><br>
-		<label for="cdp">Code Postal: </label>
+		<label>Téléphone:</label>		
+		<input type="text"  name="telephone" required="required"/><br>
 		
-		<input type="text" id="cdp" name="cdp"/><br>
-		<label for="ville">Ville: </label>
+		<label>Rue: </label>		
+		<input type="text"  name="rue" required="required"/><br>
 		
-		<input type="text" id="ville" name="ville"/><br>
-		<label for="password">Mot de passe actuel: </label>
+		<label>Code Postal: </label>
+		<input type="text"  name="cdp" required="required"/><br>
 		
-		<input type="password" id="password" name="mdp"/><br>
-		<label for="newPassword">Nouveau Mot de passe: </label>
+		<label>Ville: </label>
+		<input type="text"  name="ville" required="required"/><br>
 		
-		<input type="password" id="newPassword" name="newMdp"/><br>
-		<label for="confirmationMdp">Confirmation: </label>
+		<label>Modifier mon mot de passe: </label>
+		<input type="password"  name="mdp" required="required" maxlength="30"/><br>
 		
-		<input type="password" id="confirmationMdp" name="confirmationMdp"/><br>
-		<label for="credit">Crédit:</label></br>
 		
-	
-	
-	<button type="submit"> Enregistrer</button>
-	
+		<label>Crédit:</label></br>
+		
+		
+		<button type="submit" value="valider" name="newUtilisateur"> Enregistrer</button>
+		
 	</form>
+	
+		
 	<footer class="border-top text-center align-bottom">
 	            <div class="mt-3">
 	                <img class="small-icon" src="images/ateni.svg" alt="Eni Ecole">
