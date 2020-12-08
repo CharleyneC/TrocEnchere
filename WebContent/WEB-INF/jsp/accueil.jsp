@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="fr.eni.projet.TrocEnchere.bo.Utilisateur" %>
-<%@ page import="fr.eni.projet.TrocEnchere.ihm.SeConnecterServlet" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <!DOCTYPE html>
@@ -25,41 +24,45 @@
                     <img class="small-icon" src="images/trocenchere.svg" alt="Accueil ENI-Encheres">
                     <strong>ENI-Encheres</strong>
                 </a>
-<c:if test="${sessionScope.Utilisateur != null}">
-                <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
-                    <img class="small-icon" src="images/user.svg">
-                    <span class="align-middle text-muted">${Utilisateur.nom} ${Utilisateur.prenom}, ${Utilisateur.credit}</span>
+                
+<c:if test="${!empty sessionScope.Utilisateur}" var="user">             
+                <a class="navbar-brand" href="update" alt="Gérer mon profil" title="Gérer mon profil">
+                    <img class="small-icon" src="images/user.svg"> 
+                    <span class="align-middle text-muted">${Utilisateur.nom} ${Utilisateur.prenom} ${Utilisateur.credit}</span>                   
                 </a>
-</c:if>    
-
+	</c:if>                                	
+					 
          <ul class="navbar-nav ml-auto">
              <!-- Dropdown for small screen -->
              <li class="nav-item dropdown d-lg-none">
                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                      <img class="small-icon" src="images/menu.svg" alt="Menu ENI-Encheres">
-                 </a>
-                 <div class="dropdown-menu">
-<c:if test="${sessionScope.Utilisateur}">
-                     	<a class="dropdown-item" href="#" alt="Administrer le site">Administrer</a>                      
+                 </a>  
+                 
+<c:if test="${!empty sessionScope.Utilisateur}">                             
+                 <div class="dropdown-menu">                                                                   
 	                     <a class="dropdown-item" href="#" alt="Vendre un article">Vendre un article</a>	                    
 	                     <a class="dropdown-item" href="SeDeconnecterServlet" alt="Me déconnecter">Me déconnecter</a>
-</c:if>   
+	            </div>
+</c:if>
+            
+	            <div class="dropdown-menu">            
 	                     <a class="dropdown-item" href="CreerCompteServlet" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
-	                     <a class="dropdown-item" href="SeConnecterServlet" alt="Se connecter à ENI-Encheres">Me connecter</a>
-                 </div>
-             </li>  
-             <!-- Links for medium screen-->
-<c:if test="${sessionScope.Utilisateur}">
+	                     <a class="dropdown-item" href="SeConnecterServlet" alt="Se connecter à ENI-Encheres">Me connecter</a>       
+                 </div>                                
+             </li> 
+              
+<c:if test="${!empty sessionScope.Utilisateur}">
              <li class="nav-item d-none d-lg-block">
                  <a class="nav-link" href="#" alt="Vendre un article">Vendre un article</a>
              </li>           
              <li class="nav-item d-none d-lg-block">
                  <a class="nav-link" href="SeDeconnecterServlet" alt="Me déconnecter">Me déconnecter</a>
              </li>
-</c:if>
+</c:if>             
              <li class="nav-item d-none d-lg-block">
                  <a class="nav-link" href="CreerCompteServlet" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
-             </li>
+             </li>	             
              <li class="nav-item d-none d-lg-block">
                  <a class="nav-link" href="SeConnecterServlet" alt="Se connecter à ENI-Encheres">Me connecter</a>
              </li>
@@ -71,12 +74,6 @@
             <!--title-->
             <div class="mx-auto text-center">
                 <h1>Enchères</h1>
-            </div>
-            <!--erreur-->
-            <div class="d-flex alert-danger">
-                <div class="col-3 p-2">
-                    <img class="small-icon" src="images/error.svg">
-                </div>
             </div>
             <!--filtre-->
             <form class="form-filter border mb-3" action="#" method="">
@@ -169,9 +166,11 @@
                                 <li>Vendeur : xxxxxxxxx</li>
                             </ul>
                         </div>
+<c:if test="${!empty sessionScope.Utilisateur}">                         
                         <a class="mt-3 btn btn-lg btn-block btn-primary" href="#" title="faire une enchère">
                             <img class="small-icon" src="images/bid.svg">
                         </a>
+</c:if>                        
                     </div>
                 </div>
                 <div class="col-12 col-sm-6 p-2" >
@@ -190,9 +189,11 @@
                                 <li>Vendeur : xxxxxxxxx</li>
                             </ul>
                         </div>
+<c:if test="${!empty sessionScope.Utilisateur}">                         
                         <a class="mt-3 btn btn-lg btn-block btn-primary" href="#" title="faire une enchère">
                             <img class="small-icon" src="images/bid.svg">
                         </a>
+</c:if>                        
                     </div>
                 </div>
                 <div class="col-12 col-sm-6 p-2" >
@@ -211,9 +212,11 @@
                             <li>Vendeur : xxxxxxxxx</li>
                         </ul>
                     </div>
+<c:if test="${!empty sessionScope.Utilisateur}">                     
                     <a class="mt-3 btn btn-lg btn-block btn-primary" href="#" title="faire une enchère">
                         <img class="small-icon" src="images/bid.svg">
                     </a>
+</c:if>                    
                 </div>
 	        </div>
         </main>
