@@ -33,7 +33,7 @@
                 </a>
                 <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
                     <img class="small-icon" src="images/user.svg">
-                    <span class="align-middle text-muted"><%-- ${Utilisateur.nom} ${Utilisateur.pseudo}, ${Utilisateur.credit} --%></span>
+                    <span class="align-middle text-muted">${Utilisateur.nom} ${Utilisateur.pseudo}, ${Utilisateur.credit}</span>
                 </a>
             </nav>
         </header>
@@ -41,37 +41,35 @@
 	<form action="update" method="post">
 	
 		<label>Pseudo</label>
-		<input type="text" name="pseudo" required="required"/><br>
+		<input type="text" name="pseudo" required="required" value="${Utilisateur.pseudo }"/><br>
 		
  		<label>Prénom:</label>
-		<input type="text"  name="prenom" required="required"/><br>
+		<input type="text"  name="prenom" required="required" value="${Utilisateur.prenom }"/><br>
 		
 		<label>Nom: </label>		
-		<input type="text" name="nom" required="required"/><br>
+		<input type="text" name="nom" required="required" value="${Utilisateur.nom }"/><br>
 		
 		<label> Email:</label>		
-		<input type="email"  name="email" required="required"/><br>
+		<input type="email"  name="email" required="required" value="${Utilisateur.email }"/><br>
 		
 		<label>Téléphone:</label>		
-		<input type="text"  name="telephone" required="required"/><br>
+		<input type="text"  name="telephone" required="required" value="${Utilisateur.noTel }"/><br>
 		
 		<label>Rue: </label>		
-		<input type="text"  name="rue" required="required"/><br>
+		<input type="text"  name="rue" required="required" value="${Utilisateur.rue }"/><br>
 		
 		<label>Code Postal: </label>
-		<input type="text"  name="cdp" required="required"/><br>
+		<input type="text"  name="cdo" required="required" value="${Utilisateur.cpo }"/><br>
 		
 		<label>Ville: </label>
-		<input type="text"  name="ville" required="required"/><br>
+		<input type="text"  name="ville" required="required" value="${Utilisateur.ville }"/><br>
 		
 		<label>Modifier mon mot de passe: </label>
-		<input type="password"  name="mdp" required="required" maxlength="30"/><br>
+		<input type="password"  name="mdp" required="required" maxlength="30" value="${Utilisateur.mdp }"/><br>
 		
+				
+		<button  type="submit"> Enregistrer</button>
 		
-		<label>Crédit:</label></br>
-		
-		
-		<button type="submit" value="valider" name="newUtilisateur"> Enregistrer</button>
 		
 	</form>
 	

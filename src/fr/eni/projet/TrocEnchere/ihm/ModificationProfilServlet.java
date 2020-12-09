@@ -1,6 +1,7 @@
 package fr.eni.projet.TrocEnchere.ihm;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projet.TrocEnchere.bll.BllException;
 import fr.eni.projet.TrocEnchere.bll.UtilisateurManager;
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
-import fr.eni.projet.TrocEnchere.dal.DalException;
 
 
 @WebServlet("/update")
@@ -29,51 +30,41 @@ public class ModificationProfilServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String choix = request.getParameter("choix");
-
-		if (choix.equals("valider")) {
-			request.setAttribute("Modification OK", "Votre profil vient d'être modifié");
-			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/acceuil.jsp").forward(request, response);
-
-		} else {
-
-			this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profil.jsp").forward(request, response);
-		}
+		HttpSession session = request.getSession(false);
 		
-		
+		// Je recupère les informations en paramètres
 		try {
 			
-			Utilisateur utilisateur = new Utilisateur();
-			
-			// Je recupère les informations en paramètres
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
 			String email = request.getParameter("email");
-			String noTel = request.getParameter("tel");
+			String telephone = request.getParameter("telephone");
 			String rue = request.getParameter("rue");
-			String cpo = request.getParameter("cpo");
+			String cpo = request.getParameter("code_postal");
 			String ville = request.getParameter("ville");
-			String mdpUser = request.getParameter("mdp");
+			String mdp = request.getParameter("mot_de_passe");
 			
-			HttpSession session = request.getSession();
+			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp);
+			utilisateur = (Utilisateur) session.getAttribute("Utilisateur");
 			
-			// J'ajoute les nouvelles données à la BDD
-			try {
-				UtilisateurManager.updateProfil(pseudo, nom, prenom, email, noTel, rue, cpo, ville, mdpUser, (int) session.getAttribute("numUtilisateur"));
-			}catch (DalException e) {
-				
-				RequestDispatcher rd = request.getRequestDispatcher("profil.jsp");
-				rd.forward(request, response);
-			}
+			UtilisateurManager utilisateurManager = new UtilisateurManager();
+			utilisateurManager.updateProfil(utilisateur);
 			
-		}finally {
+			
+		} catch ( SQLException | BllException e) {
+			e.printStackTrace();
+		}
+			
+		RequestDispatcher rd = request.getRequestDispatcher("LancerApplicationServlet");
+		rd.forward(request, response);
+		
+//		request.setAttribute("Modification OK", "Votre profil vient d'être modifié");
+		
+		System.out.println("Votre profil est bien modifié");
 			
 		}
 	}
-		
-		
-}
 	
 	
 

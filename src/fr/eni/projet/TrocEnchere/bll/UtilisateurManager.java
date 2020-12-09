@@ -59,8 +59,8 @@ public class UtilisateurManager {
 		uDao.deleteProfil(userDelete);
 	}
 
-	public static int updateProfil(String pseudo, String nom,String prenom,String email,String telephone,String rue,String cp,String ville,String mdp, int numUtilisateur) throws DalException {
-		return uDao.updateProfil(pseudo, nom, prenom, email, telephone, rue, cp, ville, mdp, numUtilisateur);
+	public void updateProfil(Utilisateur utilisateur) throws SQLException, BllException {
+		uDao.updateProfil(utilisateur);
 	}
 
 }

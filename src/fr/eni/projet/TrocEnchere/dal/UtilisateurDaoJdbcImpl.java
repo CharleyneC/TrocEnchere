@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
+import fr.eni.projet.TrocEnchere.bll.UtilisateurManager;
 import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 
 
@@ -18,7 +18,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 	private final String INSERT_USER = "INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
 										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	
-	private final String UPDATE_USER = "UPDATE utilisateurs SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE  no_utilisateur = ?";
+	private final String UPDATE_USER = "UPDATE utilisateurs SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE  no_utilisateur = ?;";
 	
 	
 	private final String DELETE_USER = "DELETE * FROM Utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
@@ -59,6 +59,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		
 		try (Connection connect = ConnectionProvider.getConnection()) {
 			PreparedStatement pstt = connect.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
+			
 			pstt.setString(1, user.getPseudo());
 			pstt.setString(2, user.getNom());
 			pstt.setString(3, user.getPrenom());
@@ -173,40 +174,32 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 }
 
 	//Modifier les infos de l'utilisateur
-
-	public int updateProfil(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String cpo, String ville, String mdp, int numUtilisateur) throws DalException {
+@Override
+	public void updateProfil(Utilisateur utilisateur) throws SQLException {
 		
 		
 		try (Connection connect = ConnectionProvider.getConnection();
 				PreparedStatement pstt = connect.prepareStatement(UPDATE_USER)){
-			
-				int utilisateurUpdate = 0;
-				
-				pstt.setString(1, pseudo);
-				pstt.setString(2, nom);
-				pstt.setString(3, prenom);
-				pstt.setString(4, email);
-				pstt.setString(5, telephone);
-				pstt.setString(6, rue);
-				pstt.setString(7, cpo);
-				pstt.setString(8, ville);
-				pstt.setString(9, mdp);
-				pstt.setInt(10, numUtilisateur);
+							
+				pstt.setString(1, utilisateur.getPseudo());
+				pstt.setString(2, utilisateur.getNom());
+				pstt.setString(3, utilisateur.getPrenom());
+				pstt.setString(4, utilisateur.getEmail());
+				pstt.setString(5, utilisateur.getNoTel());
+				pstt.setString(6, utilisateur.getRue());
+				pstt.setString(7, utilisateur.getCpo());
+				pstt.setString(8, utilisateur.getVille());
+				pstt.setString(9, utilisateur.getMdp());
+				pstt.setInt(10, utilisateur.getNoUser());
 				
 				pstt.executeUpdate();
-				
-				return utilisateurUpdate ;
-	
 					
 			}catch (SQLException e) {
-				throw new DalException("Ne peut pas etre modifier");
+				e.printStackTrace();
 			}
 		
 		}
 
-
-
 	
-		
 	}
+
