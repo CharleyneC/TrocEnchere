@@ -169,8 +169,8 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 		e.printStackTrace();
 	
 	}
-
-}
+		
+	}
 
 	//Modifier les infos de l'utilisateur
 

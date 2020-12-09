@@ -34,20 +34,38 @@ public class SupprimerProfilServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession sessionUser = request.getSession(false);
 			
 		//on efface 
 		try {
-				String pseudo = request.getParameter("pseudo");
-				UtilisateurManager deleteUser = new UtilisateurManager();
-				deleteUser.effacer(pseudo);
 				
+				Utilisateur u = (Utilisateur) sessionUser.getAttribute("Utilisateur");
 					
+				
+				UtilisateurManager deleteUser = new UtilisateurManager();
+				
+				deleteUser.effacer(u.getPseudo());
+				
+				try {
+		            if(sessionUser != null) {
+		            sessionUser.removeAttribute("SeConnecterServlet");
+		            sessionUser.invalidate();
+
+		            System.out.println("Déconnection");
+		            }
+
+		        } catch (Exception e) {
+		            System.out.println(e.getMessage());
+		        }
+					
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 	}
-				//On renvoie sur la page d'accueil
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageLogin.jsp");
+		
+		//On renvoie sur la page d'accueil
+				RequestDispatcher rd = request.getRequestDispatcher("LancerApplicationServlet");
 				rd.forward(request, response);
 }
 	

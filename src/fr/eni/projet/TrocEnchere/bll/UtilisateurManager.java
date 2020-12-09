@@ -55,8 +55,13 @@ public class UtilisateurManager {
 	}
 	
 	
-	public void effacer(String pseudo) throws SQLException {
-		uDao.deleteProfil(pseudo);
+	public void effacer(String pseudo) throws SQLException, BllException {
+		if (pseudo != null) {
+		 uDao.deleteProfil(pseudo);
+		} 
+		else { 
+			throw new BllException("pas de pseudo");
+		}
 	}
 
 	public static int updateProfil(String pseudo, String nom,String prenom,String email,String telephone,String rue,String cp,String ville,String mdp, int numUtilisateur) throws DalException {

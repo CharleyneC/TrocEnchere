@@ -20,6 +20,11 @@ public class Utilisateur {
 	public Utilisateur() {
 		super();
 	}
+	
+	public Utilisateur (String pseudo) {
+		super();
+		this.pseudo = pseudo;
+	}
 	public Utilisateur(String pseudo, String email, String mdp) {
 		super();
 		this.pseudo = pseudo;
