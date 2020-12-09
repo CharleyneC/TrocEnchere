@@ -55,8 +55,8 @@ public class UtilisateurManager {
 	}
 	
 	
-	public void effacer(Utilisateur userDelete) throws SQLException {
-		uDao.deleteProfil(userDelete);
+	public void effacer(String pseudo) throws SQLException {
+		uDao.deleteProfil(pseudo);
 	}
 
 	public static int updateProfil(String pseudo, String nom,String prenom,String email,String telephone,String rue,String cp,String ville,String mdp, int numUtilisateur) throws DalException {

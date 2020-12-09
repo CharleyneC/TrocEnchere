@@ -32,26 +32,22 @@ public class SupprimerProfilServlet extends HttpServlet {
 		
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			UtilisateurManager deleteUser = new UtilisateurManager ();
-			
-			String p = request.getParameter("pseudo");
 			
 		//on efface 
 		try {
+				String pseudo = request.getParameter("pseudo");
+				UtilisateurManager deleteUser = new UtilisateurManager();
+				deleteUser.effacer(pseudo);
 				
-				deleteUser.effacer(p);
-				
-			
-				
+					
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 	}
 				//On renvoie sur la page d'accueil
-				RequestDispatcher rd = request.getRequestDispatcher("LancerApplicationServlet");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageLogin.jsp");
 				rd.forward(request, response);
 }
 	
