@@ -10,15 +10,11 @@ public interface UtilisateurDAO {
 	void addUtilisateur(Utilisateur user);
 	Utilisateur findAllUtilisateur() throws DalException;
 	Utilisateur seConnecter(String pIdentifiant, String pMdp) throws SQLException, DalException;
-	void deleteProfil(Utilisateur userDelete) throws SQLException;	
 	void updateProfil(Utilisateur utilisateur) throws SQLException;
+	void deleteProfil(String p) throws SQLException;
+
 	
 		
-	
-	
-	
-	
-
 	
 	
 	
