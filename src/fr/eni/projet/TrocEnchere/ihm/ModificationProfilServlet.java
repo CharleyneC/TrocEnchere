@@ -45,11 +45,11 @@ public class ModificationProfilServlet extends HttpServlet {
 			String ville = request.getParameter("ville");
 			String mdp = request.getParameter("mot_de_passe");
 			
-			Utilisateur utilisateurNew = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp);
-			utilisateurNew = (Utilisateur) session.getAttribute("Utilisateur");
+			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp);
+			utilisateur = (Utilisateur) session.getAttribute("Utilisateur");
 			
 			UtilisateurManager utilisateurManager = new UtilisateurManager();
-			utilisateurManager.updateProfil(utilisateurNew);
+			utilisateurManager.updateProfil(utilisateur);
 			
 			
 		} catch ( SQLException | BllException e) {
