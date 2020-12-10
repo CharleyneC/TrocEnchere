@@ -1,6 +1,7 @@
 package fr.eni.projet.TrocEnchere.ihm;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -41,27 +42,33 @@ public class ModificationProfilServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String telephone = request.getParameter("telephone");
 			String rue = request.getParameter("rue");
-			String cpo = request.getParameter("code_postal");
+			String cpo = request.getParameter("cpo");
 			String ville = request.getParameter("ville");
-			String mdp = request.getParameter("mot_de_passe");
+			String mdp = request.getParameter("mdp");
+			
+			
 			
 			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp);
-			utilisateur = (Utilisateur) session.getAttribute("Utilisateur");
-			
+			Utilisateur userSession = (Utilisateur) session.getAttribute("Utilisateur");
+			utilisateur.setNoUser(userSession.getNoUser());
 			UtilisateurManager utilisateurManager = new UtilisateurManager();
 			utilisateurManager.updateProfil(utilisateur);
 			
-			
+			session.setAttribute("Utilisateur", utilisateur);
+			RequestDispatcher rd = request.getRequestDispatcher("LancerApplicationServlet");
+			rd.forward(request, response);
+			System.out.println("Votre profil est bien modifié");
+
 		} catch ( SQLException | BllException e) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageModifierProfil.jsp");
+			rd.forward(request, response);
 			e.printStackTrace();
 		}
 			
-		RequestDispatcher rd = request.getRequestDispatcher("LancerApplicationServlet");
-		rd.forward(request, response);
+		
 		
 //		request.setAttribute("Modification OK", "Votre profil vient d'être modifié");
 		
-		System.out.println("Votre profil est bien modifié");
 			
 		}
 	}
