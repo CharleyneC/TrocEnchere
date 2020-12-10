@@ -16,12 +16,12 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 /**
  * Servlet implementation class AffichageProfil
  */
-@WebServlet("/AffichageProfil")
-public class AffichageProfil extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	@WebServlet("/AffichageProfil")
+	public class AffichageProfil extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+
  
-	
+
     public AffichageProfil() {
         super();
 
@@ -36,6 +36,6 @@ public class AffichageProfil extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/profil.jsp");
 		rd.forward(request, response);
 	}
+	
+}	
 
-
-}

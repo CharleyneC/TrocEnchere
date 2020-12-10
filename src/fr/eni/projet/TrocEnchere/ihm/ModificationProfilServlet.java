@@ -44,19 +44,20 @@ public class ModificationProfilServlet extends HttpServlet {
 			String cpo = request.getParameter("cpo");
 			String ville = request.getParameter("ville");
 			String mdp = request.getParameter("mdp");
-						
-			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp);						
+		
+			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp);
+			Utilisateur userSession = (Utilisateur) session.getAttribute("Utilisateur");
+			utilisateur.setNoUser(userSession.getNoUser());
 			UtilisateurManager utilisateurManager = new UtilisateurManager();
 			utilisateurManager.updateProfil(utilisateur);
 			
 			session.setAttribute("Utilisateur", utilisateur);
-			
+
 		} catch ( SQLException | BllException e) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageModifierProfil.jsp");
+			rd.forward(request, response);
 			e.printStackTrace();
 		}
-			
-		RequestDispatcher rd = request.getRequestDispatcher("AffichageProfil");
-		rd.forward(request, response);
 
 		}
 	}
