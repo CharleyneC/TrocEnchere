@@ -12,11 +12,4 @@ public interface UtilisateurDAO {
 	Utilisateur seConnecter(String pIdentifiant, String pMdp) throws SQLException, DalException;
 	void updateProfil(Utilisateur utilisateur) throws SQLException;
 	void deleteProfil(String p) throws SQLException;
-
-	
-		
-	
-	
-	
-
 }

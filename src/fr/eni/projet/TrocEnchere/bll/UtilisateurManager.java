@@ -36,7 +36,7 @@ public class UtilisateurManager {
 			user.getVille() != null &&
 			user.getMdp() != null) {
 		}else {
-			BllException ex = new BllException("Les champs ne sont pas correctement renseignï¿½s");
+			BllException ex = new BllException("Les champs ne sont pas correctement renseignés");
 			throw ex;	
 		}
 		
@@ -55,11 +55,17 @@ public class UtilisateurManager {
 	}
 	
 	
-	public void effacer(Utilisateur userDelete) throws SQLException {
-		uDao.deleteProfil(userDelete);
-	}
+	public void effacer(String pseudo) throws SQLException, BllException {
+        if (pseudo != null) {
+         uDao.deleteProfil(pseudo);
+        } 
+        else { 
+            throw new BllException("pas de pseudo");
+        }
+    }
 
 	public void updateProfil(Utilisateur utilisateur) throws SQLException, BllException {
+		validerUser (utilisateur);
 		uDao.updateProfil(utilisateur);
 	}
 

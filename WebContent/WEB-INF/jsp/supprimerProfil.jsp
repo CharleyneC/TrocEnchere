@@ -32,7 +32,7 @@
                 </a>
                 <a class="navbar-brand" href="#" alt="Gérer mon profil" title="Gérer mon profil">
                     <img class="small-icon" src="images/user.svg">
-                    <span class="align-middle text-muted">XXXXX xxx, 0 crédit(s)</span>
+                    <span class="align-middle text-muted">${Utilisateur.nom} ${Utilisateur.pseudo}, ${Utilisateur.credit}</span>
                 </a>
             </nav>
         </header>

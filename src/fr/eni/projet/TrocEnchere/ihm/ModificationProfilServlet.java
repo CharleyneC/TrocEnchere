@@ -32,37 +32,32 @@ public class ModificationProfilServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		
-		// Je recupère les informations en paramètres
+		// Je recupère les informations en param�tres
 		try {
-			
+					
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
 			String email = request.getParameter("email");
 			String telephone = request.getParameter("telephone");
 			String rue = request.getParameter("rue");
-			String cpo = request.getParameter("code_postal");
+			String cpo = request.getParameter("cpo");
 			String ville = request.getParameter("ville");
-			String mdp = request.getParameter("mot_de_passe");
-			
-			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp);
-			utilisateur = (Utilisateur) session.getAttribute("Utilisateur");
-			
+			String mdp = request.getParameter("mdp");
+						
+			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, cpo, ville, mdp);						
 			UtilisateurManager utilisateurManager = new UtilisateurManager();
 			utilisateurManager.updateProfil(utilisateur);
 			
+			session.setAttribute("Utilisateur", utilisateur);
 			
 		} catch ( SQLException | BllException e) {
 			e.printStackTrace();
 		}
 			
-		RequestDispatcher rd = request.getRequestDispatcher("LancerApplicationServlet");
+		RequestDispatcher rd = request.getRequestDispatcher("AffichageProfil");
 		rd.forward(request, response);
-		
-//		request.setAttribute("Modification OK", "Votre profil vient d'être modifié");
-		
-		System.out.println("Votre profil est bien modifié");
-			
+
 		}
 	}
 	

@@ -43,11 +43,11 @@
 		<label>Pseudo</label>
 		<input type="text" name="pseudo" required="required" value="${Utilisateur.pseudo }"/><br>
 		
- 		<label>Prénom:</label>
-		<input type="text"  name="prenom" required="required" value="${Utilisateur.prenom }"/><br>
+ 		<label>Nom:</label>
+		<input type="text"  name="nom" required="required" value="${Utilisateur.nom }"/><br>
 		
-		<label>Nom: </label>		
-		<input type="text" name="nom" required="required" value="${Utilisateur.nom }"/><br>
+		<label>Prénom: </label>		
+		<input type="text" name="prenom" required="required" value="${Utilisateur.prenom }"/><br>
 		
 		<label> Email:</label>		
 		<input type="email"  name="email" required="required" value="${Utilisateur.email }"/><br>
@@ -59,7 +59,7 @@
 		<input type="text"  name="rue" required="required" value="${Utilisateur.rue }"/><br>
 		
 		<label>Code Postal: </label>
-		<input type="text"  name="cdo" required="required" value="${Utilisateur.cpo }"/><br>
+		<input type="text"  name="cpo" required="required" value="${Utilisateur.cpo }"/><br>
 		
 		<label>Ville: </label>
 		<input type="text"  name="ville" required="required" value="${Utilisateur.ville }"/><br>
@@ -68,7 +68,7 @@
 		<input type="password"  name="mdp" required="required" maxlength="30" value="${Utilisateur.mdp }"/><br>
 		
 				
-		<button  type="submit"> Enregistrer</button>
+			<button type="submit"> Enregister</button>
 		
 		
 	</form>

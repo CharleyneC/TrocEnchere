@@ -20,13 +20,13 @@
         <header>
             <nav class="pr-5 navbar navbar-expand-sm bg-dark navbar-dark align-top justify-content-between">
                 <!-- Brand/logo -->
-                <a class="navbar-brand" href="LancerApplicationServlet">
+                <a class="navbar-brand" href="AffichageProfil">
                     <img class="small-icon" src="images/trocenchere.svg" alt="Accueil ENI-Encheres">
                     <strong>ENI-Encheres</strong>
                 </a>
                 
 <c:if test="${!empty sessionScope.Utilisateur}" var="user">             
-                <a class="navbar-brand" href="update" alt="Gérer mon profil" title="Gérer mon profil">
+                <a class="navbar-brand" href="AffichageProfil" alt="Gérer mon profil" title="Gérer mon profil">
                     <img class="small-icon" src="images/user.svg"> 
                     <span class="align-middle text-muted">${Utilisateur.nom} ${Utilisateur.prenom} ${Utilisateur.credit}</span>                   
                 </a>
@@ -45,11 +45,12 @@
 	                     <a class="dropdown-item" href="SeDeconnecterServlet" alt="Me déconnecter">Me déconnecter</a>
 	            </div>
 </c:if>
-            
+<c:if test="${empty sessionScope.Utilisateur}">             
 	            <div class="dropdown-menu">            
 	                     <a class="dropdown-item" href="CreerCompteServlet" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
 	                     <a class="dropdown-item" href="SeConnecterServlet" alt="Se connecter à ENI-Encheres">Me connecter</a>       
-                 </div>                                
+                 </div>
+</c:if>                                                 
              </li> 
               
 <c:if test="${!empty sessionScope.Utilisateur}">
@@ -59,13 +60,16 @@
              <li class="nav-item d-none d-lg-block">
                  <a class="nav-link" href="SeDeconnecterServlet" alt="Me déconnecter">Me déconnecter</a>
              </li>
-</c:if>             
+</c:if>
+
+<c:if test="${empty sessionScope.Utilisateur}">              
              <li class="nav-item d-none d-lg-block">
                  <a class="nav-link" href="CreerCompteServlet" alt="S'inscrire à ENI-Encheres">M'inscrire</a>
              </li>	             
              <li class="nav-item d-none d-lg-block">
                  <a class="nav-link" href="SeConnecterServlet" alt="Se connecter à ENI-Encheres">Me connecter</a>
              </li>
+</c:if>             
          </ul>
      </nav>
  </header>
@@ -96,6 +100,7 @@
                         </div>
                     </div>
                     <!--Partie droite-->
+<c:if test="${!empty sessionScope.Utilisateur}">                     
                     <div class="col-md-6 mb-3">  	
                         <div class="form-check">
                             <label class="form-check-label">
@@ -141,8 +146,8 @@
                                 </label>
                             </div>
                         </div>
-
                     </div>
+</c:if>                    
                 </div>
                 <button class="btn btn-primary btn-lg btn-block" type="submit">
                 	<img class="small-icon" src="images/search.svg" alt="Eni Ecole">
