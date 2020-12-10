@@ -68,7 +68,8 @@
 		<input type="password"  name="mdp" required="required" maxlength="30" value="${Utilisateur.mdp }"/><br>
 		
 				
-			<button type="submit"> Enregister</button>
+			<button type="submit" action="AffichageProfil"> Enregister</button>
+			<button type="submit" action="LancerApplicationServlet"> Annuler</button>
 		
 		
 	</form>
