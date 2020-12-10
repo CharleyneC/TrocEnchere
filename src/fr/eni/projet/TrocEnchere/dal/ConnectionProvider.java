@@ -18,7 +18,7 @@ abstract class ConnectionProvider {
 			ConnectionProvider.dataSource = (DataSource)context.lookup("java:comp/env/jdbc/TrocEnchere");
 		}catch (NamingException e) {
 			e.printStackTrace();
-			throw new RuntimeException("Impossible d'accéder à la base de données");
+			throw new RuntimeException("Impossible d'accéder à la base de données");			
 		}
 	}
 	public static Connection getConnection() throws SQLException {

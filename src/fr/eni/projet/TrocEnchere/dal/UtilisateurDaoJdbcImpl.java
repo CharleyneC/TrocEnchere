@@ -13,7 +13,7 @@ import fr.eni.projet.TrocEnchere.bo.Utilisateur;
 public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 
 	private final String SELECT_ALL = "SELECT * FROM utilisateurs";
-	private final String SELECT_PROFIL ="SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
+	private final String SELECT_PROFIL ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	private final String SELECT_ID = "SELECT * FROM utilisateurs WHERE pseudo = ? and mot_de_passe = ?";
 	private final String INSERT_USER = "INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal,ville, mot_de_passe, credit, administrateur) "
 										+ "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -135,18 +135,20 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDAO {
 				ResultSet rs = pstt.executeQuery();
 				
 				if(rs.next()) {
-					String pseudo = rs.getString(1);
-					String nom = rs.getString(2);
-					String prenom = rs.getString(3);
-					String emailUser = rs.getString(4);
-					String noTel = rs.getString(5);
-					String rue = rs.getString(6);
-					String cpo = rs.getString(7);
-					String ville = rs.getString(8);
-					String mdpUser = rs.getString(9);
-					int credit = rs.getInt(10);
+					int id = rs.getInt(1);
+					String pseudo = rs.getString(2);
+					String nom = rs.getString(3);
+					String prenom = rs.getString(4);
+					String emailUser = rs.getString(5);
+					String noTel = rs.getString(6);
+					String rue = rs.getString(7);
+					String cpo = rs.getString(8);
+					String ville = rs.getString(9);
+					String mdpUser = rs.getString(10);
+					int credit = rs.getInt(11);
 
 					userUnique = new Utilisateur(pseudo, nom, prenom, emailUser, noTel, rue, cpo, ville, mdpUser, credit);
+					userUnique.setNoUser(id);
 				}
 				rs.close();
 	}catch(Exception e) {

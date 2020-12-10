@@ -48,12 +48,13 @@ public class CreerCompteServlet extends HttpServlet {
 			//On ajoute les infos dans la BDD
 			um.ajouterUser(user);
 			
-		} catch (Exception e) {
-			
+		} catch (Exception e) {			
+			RequestDispatcher rd = request.getRequestDispatcher("CreerCompteServlet");
+			rd.forward(request, response);
+			e.printStackTrace();			
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("SeConnecterServlet");
-		rd.forward(request, response);
-		
+		rd.forward(request, response);		
 	}
 
 }

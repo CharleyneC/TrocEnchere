@@ -54,10 +54,12 @@ public class SeConnecterServlet extends HttpServlet {
             }
 
         } catch (Exception e) {
+        	
             System.out.println("erreur");
             System.out.println(e.getMessage());
             RequestDispatcher rd=request.getRequestDispatcher("SeConnecterServlet");
             rd.include(request,response);
+            e.printStackTrace();
         }
     }
 }

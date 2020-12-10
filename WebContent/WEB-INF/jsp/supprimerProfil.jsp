@@ -40,15 +40,17 @@
 
 			<p> Etes-vous sûr de vouloir supprimer votre profil ?</p>
 
-			<form action="Supprimer" class="delete" method="post">
-			<button type="submit"> OUI</button>
-			</form>
+			<div>
+				<form action="Supprimer" class="delete" method="post">
+					<button type="submit">Oui</button>
+				</form>
+				<form action="AffichageProfil" class="retour" method="post">
+					<button type="submit">Non</button>
+				</form>
+			</div>
+			
 
 
-<a href="WEB-INF/jsp/profil.jsp"><button> NON </button></a>
-
-
-	</form>
 	<footer class="border-top text-center align-bottom">
 	            <div class="mt-3">
 	                <img class="small-icon" src="images/ateni.svg" alt="Eni Ecole">

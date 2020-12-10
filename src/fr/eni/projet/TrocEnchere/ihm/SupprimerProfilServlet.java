@@ -40,10 +40,7 @@ public class SupprimerProfilServlet extends HttpServlet {
         try {
 
                 Utilisateur u = (Utilisateur) sessionUser.getAttribute("Utilisateur");
-
-
                 UtilisateurManager deleteUser = new UtilisateurManager();
-
                 deleteUser.effacer(u.getPseudo());
 
                 try {
@@ -58,14 +55,12 @@ public class SupprimerProfilServlet extends HttpServlet {
             		rd.forward(request, response);
 
                 } catch (Exception e) {
+                	e.printStackTrace();
                     System.out.println(e.getMessage());
                 }
 
-
         } catch (Exception e) {
             e.printStackTrace();
-
     }
-	}
-	
+	}	
 }

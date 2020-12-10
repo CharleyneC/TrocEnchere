@@ -37,7 +37,9 @@ public class SeDeconnecterServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
+			
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		//On renvoie sur la page accueil

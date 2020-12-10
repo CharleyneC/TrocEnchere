@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="fr.eni.projet.TrocEnchere.bo.Utilisateur" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +44,7 @@
             <form class="form-register needs-validation" novalidate action="CreerCompteServlet" method="post">
                 <div class="row">
                     <div class="col-md-6 mb-3">
+
                         <label for="pseudo">Pseudo</label>
                         <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="" maxlength="30" required value="">
                         <div class="invalid-feedback">
@@ -68,7 +72,7 @@
                 
                     <div class="col-md-6 mb-3">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="" maxlength="20" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" value="" maxlength="50" required>
                         <div class="invalid-feedback">
                             Ce champ est invalide !
                         </div>

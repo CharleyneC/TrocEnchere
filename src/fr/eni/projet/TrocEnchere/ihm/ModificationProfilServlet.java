@@ -52,9 +52,12 @@ public class ModificationProfilServlet extends HttpServlet {
 			utilisateurManager.updateProfil(utilisateur);
 			
 			session.setAttribute("Utilisateur", utilisateur);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("AffichageProfil");
+			rd.forward(request, response);
 
 		} catch ( SQLException | BllException e) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/pageModifierProfil.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("update");
 			rd.forward(request, response);
 			e.printStackTrace();
 		}
